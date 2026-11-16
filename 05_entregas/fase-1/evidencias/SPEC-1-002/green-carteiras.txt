@@ -1,0 +1,11 @@
+=== TDD2 GREEN: isolamento de carteira (CA-1-06) — versao 0.0.12
+--- A criada: d5g3rav8w042i9u
+--- B criada: vvdxwv3r54r15pe
+--- 1) lista de perfis SEM cliente (esperado 400)
+{"data":{},"message":"Informe a carteira.","status":400} HTTP:400
+--- 2) perfis da carteira A (esperado so itens de A)
+{"items":[]} HTTP:200
+--- 3) perfis da carteira B (esperado so itens de B)
+{"items":[]} HTTP:200
+--- 4) carteira inexistente (esperado 400)
+{"data":{},"message":"Carteira não encontrada.","status":400} HTTP:400

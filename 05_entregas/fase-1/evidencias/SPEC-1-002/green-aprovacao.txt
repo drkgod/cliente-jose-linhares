@@ -1,0 +1,8 @@
+=== TDD4 GREEN: aprovacao (CA-1-08) — versao 0.0.12
+--- 1) antes de aprovar, lista da carteira A (nada como aprovado)
+[(1, 'sugerido')]
+--- 2) aprovar o perfil q5lfcko6zz0uhdd
+versao 1 status aprovado aprovado_em 2026-11-16 21:40:06.360Z
+HTTP: 200
+--- 3) lista depois de aprovar
+[(1, 'aprovado')]

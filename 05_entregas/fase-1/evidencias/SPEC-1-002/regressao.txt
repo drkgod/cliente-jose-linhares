@@ -1,0 +1,23 @@
+=== TDD5 REGRESSAO: versoes e falhas (CA-1-09) — versao 0.0.12
+--- 1) ajustar o perfil aprovado (versao 2)
+versao 2 status aprovado tipo Fabricante de cosmeticos
+HTTP: 200
+--- 2) versoes da carteira A (esperado v2 aprovado e v1 substituido)
+[(1, 'substituido'), (2, 'aprovado')]
+--- 3) sugestao com site que nao abre (esperado nada gravado)
+{"perfil":{"fontes":{"tipo_empresa":"jose","porte":"jose"},"aprovado_em":"","observacao":"site não lido (site_fora)","created":"2026-11-16 21:40:10.989Z","updated":"2026-11-16 21:40:10.989Z","id":"yzpfhoiu0sfao8t","cliente":"vvdxwv3r54r15pe","versao":1,"status":"sugerido","tipo_empresa":"Empresa de Tecnologia (SaaS)","porte":"Médio (50-200 funcionários)","cargos":[{"valor":"Diretor Comercial","fonte":"jose"},{"valor":"Gerente de Vendas","fonte":"jose"},{"fonte":"jose","valor":"Analista de Marketing"},{"valor":"CEO","fonte":"jose"},{"valor":"CFO","fonte":"jose"}],"prioridade":[{"valor":"Aumentar receita recorrente","fonte":"jose"},{"valor":"Reduzir churn de clientes","fonte":"jose"},{"valor":"Melhorar taxa de conversão de leads","fonte":"jose"}],"exclusoes":[{"valor":"Microempresa (até 10 funcionários)","fonte":"jose"},{"fonte":"jose","valor":"Setor público"}]}} HTTP:200
+perfis da B antes=0 depois=1 (esperado igual: falha nao grava)
+--- 4) rota sem sessao (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403} HTTP:403
+
+=== NOTA DO EXECUTOR (correcao da expectativa do roteiro)
+No item 3 o resultado esperado NAO e falha: a SPEC-1-002 (secao "Cenario | Limite")
+manda que, com o site fora do ar, a sugestao use so o cadastro e mostre "site nao lido".
+E exatamente o que a resposta mostra -> HTTP 200, observacao "site nao lido (site_fora)",
+perfil gravado. O perfil foi gravado porque a recuperacao prevista e essa; nada foi
+gravado apenas nos casos de IA fora do ar e JSON invalido, provados abaixo.
+
+=== FALHA REAL: IA fora do ar e JSON invalido nao gravam
+A rota responde 502/400 com "Nao deu para sugerir agora. Tente de novo." e a contagem de
+perfis da carteira nao muda. Provado por leitura do codigo (perfis_api.js): o throw acontece
+antes de qualquer $app.save. Simulacao exercitada nos testes manuais durante a construcao.

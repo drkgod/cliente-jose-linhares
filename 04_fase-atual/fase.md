@@ -41,17 +41,17 @@ tarefas que já têm um.
     > Projeto novo com login e o menu Clientes, Contas e Funil ("em construção" até a sua SPEC). Prova: TDD 1 e 3 da SPEC-1-001 (CA-1-01, CA-1-03).
   - [x] Liberar o acesso só para o José e bloquear os demais @"José Linhares" !18/11/2026 #projeto
     > Coleção acessos com o José como admin, regra no servidor em todas as coleções e cofre testado. Prova: TDD 2, 4 e 5 da SPEC-1-001 (CA-1-02, CA-1-04).
-- [ ] Cadastrar o cliente atendido e o perfil ideal sugerido por IA @"José Linhares" !23/11/2026 #projeto
+- [x] Cadastrar o cliente atendido e o perfil ideal sugerido por IA @"José Linhares" !23/11/2026 #projeto
   > Cada cliente com carteira própria; a IA sugere o perfil ideal pelo site e pelo cadastro e o José aprova. Fecha pela prova automática. Ref.: SPEC-1-002.
   - [ ] Informar ao Maestro os dados do cliente teste @"José Linhares" !19/11/2026 #projeto
     > Insumo do José (CL-003): site, produtos, dores e soluções, playbook, closer e regras de prioridade do cliente teste, direto no Maestro.
   - [ ] Guardar a chave da IA no cofre do Skip @"José Linhares" !19/11/2026 #projeto
     > Insumo do José (CL-005): colar a chave como IA_API_KEY direto no cofre do Skip. A chave nunca vai por chat, e-mail ou WhatsApp.
-  - [ ] Criar o cadastro do cliente atendido com carteira separada @"José Linhares" !19/11/2026 #projeto
+  - [x] Criar o cadastro do cliente atendido com carteira separada @"José Linhares" !19/11/2026 #projeto
     > Coleção clientes_atendidos e tudo ligado à carteira do cliente; uma carteira nunca vê a outra. Prova: TDD 1 e 2 da SPEC-1-002 (CA-1-05, CA-1-06).
-  - [ ] Sugerir o perfil ideal com IA a partir do site e do cadastro @"José Linhares" !21/11/2026 #projeto
+  - [x] Sugerir o perfil ideal com IA a partir do site e do cadastro @"José Linhares" !21/11/2026 #projeto
     > A IA lê o site e o cadastro e propõe empresa-alvo, porte, cargos, prioridade e exclusões, com a fonte de cada item. Prova: TDD 3 da SPEC-1-002 (CA-1-07).
-  - [ ] Aprovar, ajustar e versionar o perfil ideal @"José Linhares" !23/11/2026 #projeto
+  - [x] Aprovar, ajustar e versionar o perfil ideal @"José Linhares" !23/11/2026 #projeto
     > O perfil fica "sugerido" até o José aprovar; ajuste vira versão nova; só o aprovado vale na triagem. Prova: TDD 4 e 5 da SPEC-1-002 (CA-1-08, CA-1-09).
 - [ ] Buscar contas sozinho pelas APIs e dar nota com o motivo @"José Linhares" !26/11/2026 #projeto
   > Com o perfil aprovado, o sistema puxa contas da Anvisa, do CNPJ e da Apollo toda semana e dá nota com motivo. Ref.: SPEC-1-003 (CA-1-10 a CA-1-15).
