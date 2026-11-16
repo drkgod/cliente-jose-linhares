@@ -1,0 +1,16 @@
+=== TDD5 REGRESSAO — versao 17760be
+1) Fluxo completo exercitado pela API, ponta a ponta:
+   cadastro do cliente A -> perfil sugerido e aprovado -> busca disparada -> contas criadas
+   -> triagem com nota -> contas no funil -> movimentacao -> anotacao -> filtros.
+2) Cliente B (ficticio, 3 contas secretas) criado so para provar isolamento de carteira:
+   o funil de B devolveu apenas as 6 contas de B e NENHUMA conta de A.
+3) Etapa invalida recusada (400 "Etapa invalida"), descarte sem motivo recusado
+   (400 "Informe o motivo para descartar a conta"), funil sem carteira recusado (400) e sem
+   sessao recusado (403).
+4) Limpeza: clientes A e B removidos (HTTP 204 nos dois). O cascade levou contas, pesquisas,
+   decisores, buscas e historico.
+5) Nenhum residuo: as colecoes voltaram a zero apos a limpeza.
+
+OBSERVACAO DE IMPLEMENTACAO
+O arrastar (drag and drop) foi implementado, mas cada cartao TAMBEM tem um seletor de etapa,
+que e o plano B previsto na SPEC. No celular e no teclado, o seletor e o caminho garantido.

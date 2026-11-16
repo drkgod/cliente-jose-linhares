@@ -1,39 +1,49 @@
 # Estado atual — Adapta Cliente
 
 - schema_version: adapta-cliente-state/v3
-- task_id: pesquisa-briefing
+- task_id: funil-visual
 - executor: agente do cliente (ETHOS)
 - owner_informativo: José Linhares
-- spec: 04_fase-atual/specs/spec-1-004-pesquisa-automatica-briefing.md
-- analise: .adapta-cliente/analises/task-pesquisa-briefing.md
-- etapa: concluida
-- autorizacao_implementacao: confirmada pelo pedido "continue para a SPEC-1-004" em 16/11/2026 20:21
-- aguardando_teste: nenhuma
+- spec: 04_fase-atual/specs/spec-1-005-funil-visual.md
+- analise: .adapta-cliente/analises/task-funil.md
+- etapa: aguardando_teste_humano
+- autorizacao_implementacao: confirmada pelo pedido "pode seguir para a SPEC-1-005" em 16/11/2026 20:33
+- aguardando_teste: funil-visual — sessão da fase 1 (roteiro + questionário de produto)
 - em_espera: nenhuma
-- teste_humano: nao_aplicavel:SPEC-1-004 fecha pela prova automática (D-07) — red.txt, green-pesquisa.txt, green-briefing.txt, green-falhas.txt e regressao.txt em 05_entregas/fase-1/evidencias/SPEC-1-004/
-- verificacao_automatica: passou — QA do Skip verde, versão 0.0.18 (ed42afa) publicada
+- teste_humano: pendente:sessão da SPEC-1-005 com o José (até 15 min)
+- verificacao_automatica: passou — QA do Skip verde, versão 0.0.20 (17760be) publicada
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: ed42afa
-- skip_publicacao: publicada:ed42afa em 2026-11-16T23:28:36.533Z
+- skip_versao: 17760be
+- skip_publicacao: publicada:17760be em 2026-11-16T23:40:52.452Z
 - pendente_github: nao
-- ultima_acao: SPEC-1-004 entregue, publicada e provada — CA-1-16 a CA-1-20
-- proxima_acao: abrir a SPEC-1-005 (funil visual) e preparar a sessão de teste com o José
-- atualizado_em: 2026-11-16T20:30:00-03:00
+- ultima_acao: SPEC-1-005 entregue, publicada e provada — CA-1-21 a CA-1-25
+- proxima_acao: fazer a sessão de teste da fase 1 com o José e registrar as respostas
+- atualizado_em: 2026-11-16T20:42:00-03:00
 
-## Descobertas técnicas (valem para as próximas SPECs)
+## Construção da fase 1 — concluída
 
-- **`TextDecoder` não funciona no JSVM do PocketBase:** recusa o corpo do `$http.send`
-  ("expected ArrayBuffer, TypedArray, or DataView"). A leitura de site/CSV passou a converter os
-  bytes com `String.fromCharCode`. O mesmo problema derrubou a fonte Anvisa na SPEC-1-003.
-- **Sem função de topo em callback:** já registrado; os gatilhos chamam rotas internas com
-  `PB_INSTANCE_URL` + `PB_SUPERUSER_TOKEN`, que funciona.
-- **A IA do Skip funciona** (`$ai.chat`, modelo `fast`) e devolve os três itens do briefing com fonte.
+| SPEC | Versão | Critérios |
+|---|---|---|
+| SPEC-1-001 | 0a0d0f5 | CA-1-01 a CA-1-04 |
+| SPEC-1-002 | fb4b1c6 | CA-1-05 a CA-1-09 |
+| SPEC-1-003 | e17e436 | CA-1-10 a CA-1-15 |
+| SPEC-1-004 | ed42afa | CA-1-16 a CA-1-20 |
+| SPEC-1-005 | 17760be | CA-1-21 a CA-1-25 |
+
+## Decisão de modelagem registrada
+
+`contas.etapa` agora é a etapa do **funil** (nova, priorizada, em_pesquisa, pronta_cadencia,
+descartada) e é independente de `situacao_triagem` (prioridade, fora_do_perfil, pendente_dados).
+A triagem não reescreve mais a etapa: só a movimentação do José muda a coluna. Migração 0018
+mapeou as contas que já existiam.
 
 ## Pendências para o cliente
 
-- **CL-003 — dados do cliente teste:** José informa amanhã. Com eles o cadastro real é criado e a
-  busca + pesquisa + briefing passam a rodar sobre uma conta de verdade.
-- **CL-004 — lista de contas** (opcional) e **CL-010 — chave da Apollo** (sem ela, decisores e
-  empresas vêm do simulador).
+- **CL-003 — dados do cliente teste** (José informa amanhã): com eles o cadastro real é criado e
+  a busca, a pesquisa e o funil passam a rodar sobre dados verdadeiros, o que também alimenta a
+  sessão de teste.
+- **CL-004** (lista de contas, opcional) e **CL-010** (chave da Apollo): sem a chave, empresas e
+  decisores vêm do simulador.
+- **Sessão de teste da fase 1**: roteiro da SPEC-1-005 + questionário de produto.

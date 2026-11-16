@@ -23,3 +23,15 @@ Nenhuma.
 
 - Versão publicada `e17e436`. CA-1-10 a CA-1-15 provados; provas em `05_entregas/fase-1/evidencias/SPEC-1-003/`.
 - Fecha pela prova automática (D-07). Próxima: SPEC-1-004.
+
+## SPEC-1-005 — entregue em 16/11/2026
+
+- Versão publicada `17760be`. CA-1-21 a CA-1-25 provados; provas em `05_entregas/fase-1/evidencias/SPEC-1-005/`.
+- Pendente desta SPEC: a **sessão de teste com o José** (roteiro + questionário de produto), que
+  fecha `Testar o funil e responder o questionário de produto`.
+
+## Estado da fase 1 em 16/11/2026
+
+- Construção: SPEC-1-001 a SPEC-1-005 entregues e publicadas, com prova automática.
+- Critérios CA-1-01 a CA-1-25 provados.
+- Faltam as tarefas do consultor (aval do escopo e validação da fase) e a sessão de teste do José.

@@ -1,0 +1,20 @@
+=== TDD3 GREEN — CA-1-23 e CA-1-24 — versao 17760be
+--- 1) mover cf40m90fhhyvjy0 para em_pesquisa
+{"mudou":true,"de":"nova","para":"em_pesquisa","ok":true}
+--- 2) mover awnrnevhhmkuutl para priorizada
+{"ok":true,"mudou":true,"de":"nova","para":"priorizada"}
+--- 3) descartar SEM motivo (esperado recusa 400)
+{"data":{},"message":"Informe o motivo para descartar a conta.","status":400} HTTP:400
+--- 4) descartar COM motivo
+{"ok":true,"mudou":true,"de":"priorizada","para":"descartada"}
+--- 5) anotar contato de outro canal
+{"ok":true}
+--- 6) etapa invalida (esperado 400)
+{"data":{},"message":"Etapa inválida.","status":400} HTTP:400
+--- 7) historico das contas
+  conta cf40m90fhhyvjy0:
+    anotacao | - -> - | motivo: - | texto: Falei com ele no evento, pediu retorno em dezembro | quando: 2026-11-16 23:40:34.324Z
+    mudanca_etapa | nova -> em_pesquisa | motivo: - | texto: - | quando: 2026-11-16 23:40:34.194Z
+  conta awnrnevhhmkuutl:
+    mudanca_etapa | priorizada -> descartada | motivo: Fora do perfil | texto: - | quando: 2026-11-16 23:40:34.294Z
+    mudanca_etapa | nova -> priorizada | motivo: - | texto: - | quando: 2026-11-16 23:40:34.227Z

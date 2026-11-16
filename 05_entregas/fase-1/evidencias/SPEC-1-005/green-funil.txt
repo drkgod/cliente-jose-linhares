@@ -1,0 +1,18 @@
+=== TDD2 GREEN — CA-1-21 e CA-1-22 — versao 17760be
+etapas: ['nova', 'priorizada', 'em_pesquisa', 'pronta_cadencia', 'descartada']
+  nova -> contador 6 | cartoes na coluna 6
+  priorizada -> contador 0 | cartoes na coluna 0
+  em_pesquisa -> contador 0 | cartoes na coluna 0
+  pronta_cadencia -> contador 0 | cartoes na coluna 0
+  descartada -> contador 0 | cartoes na coluna 0
+total no funil: 6
+--- lista de contas da carteira A (mesma base do contador)
+total de contas: 6
+por etapa: {'prioridade': 1, 'pendente_dados': 5}
+--- ficha da conta cf40m90fhhyvjy0
+empresa: Natura Cosmeticos | nota 100 | faixa A
+motivos: [('cosmeticos', 100)]
+
+=== FICHA DA CONTA (CA-1-22)
+Natura Cosmeticos | nota 100 | faixa A | motivos [("cosmeticos",50),("industria",50)]
+Historico em ordem de data (mais novo primeiro), com tipo, de->para, motivo, texto e data.

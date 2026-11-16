@@ -1,0 +1,18 @@
+=== TDD1 RED — contador sem regra (versao 17760be)
+Antes da correcao, o campo `contas.etapa` usava os valores da TRIAGEM da SPEC-1-003
+(prioridade / fora_do_perfil / pendente_dados) e nao as 5 etapas do funil. Efeito observado
+na primeira rodada de prova (versao 8b031c7):
+
+  funil: contador 0 em TODAS as colunas, total 0
+  lista de contas da mesma carteira: 6 contas (1 prioridade + 5 pendente_dados)
+  mover para "em_pesquisa" -> 400 "Invalid value em_pesquisa"
+
+Ou seja: o contador nao batia com a lista e o funil nao movia nada. Isso mostrava a falha.
+
+Correcao aplicada (migracao 0018 + hook de triagem):
+ - `contas.etapa` passou a ter os 5 valores do funil;
+ - as contas existentes foram mapeadas (prioridade -> priorizada, pendente_dados -> nova,
+   fora_do_perfil -> descartada);
+ - a triagem deixou de reescrever `etapa` (so a movimentacao do Jose muda a etapa).
+
+Depois: contador 6 = 6 cartoes = 6 contas na lista.			

@@ -75,13 +75,13 @@ tarefas que já têm um.
     > Dor provável, gatilho e abordagem com as fontes; dor sem fonte fica "a confirmar". Prova: TDD 3 da SPEC-1-004 (CA-1-19).
   - [x] Encadear a pesquisa com fila, limite diário e nova tentativa @"José Linhares" !30/11/2026 #projeto
     > Fila com limite de 25 por dia, nova tentativa automática e correção do José mantida. Prova: TDD 4 e 5 da SPEC-1-004 (CA-1-20).
-- [ ] Mostrar as contas no funil visual do CRM @"José Linhares" !02/12/2026 #projeto
+- [x] Mostrar as contas no funil visual do CRM @"José Linhares" !02/12/2026 #projeto
   > Funil por cliente com etapa, nota, briefing, histórico e motivo. No fim, o único teste da fase com o José e o questionário de produto. Ref.: SPEC-1-005.
-  - [ ] Montar o funil com as etapas e a ficha da conta @"José Linhares" !01/12/2026 #projeto
+  - [x] Montar o funil com as etapas e a ficha da conta @"José Linhares" !01/12/2026 #projeto
     > Colunas por etapa, cartão com nota e origem, ficha com dados, motivo, briefing e histórico. Prova: TDD 1 e 2 da SPEC-1-005 (CA-1-21, CA-1-22).
-  - [ ] Mover contas entre etapas e anotar à mão com histórico @"José Linhares" !01/12/2026 #projeto
+  - [x] Mover contas entre etapas e anotar à mão com histórico @"José Linhares" !01/12/2026 #projeto
     > O José arrasta a conta, dá o motivo ao descartar e anota contato de outro canal; tudo vai ao histórico. Prova: TDD 3 da SPEC-1-005 (CA-1-23, CA-1-24).
-  - [ ] Filtrar por cliente, faixa de nota, etapa e origem @"José Linhares" !01/12/2026 #projeto
+  - [x] Filtrar por cliente, faixa de nota, etapa e origem @"José Linhares" !01/12/2026 #projeto
     > Filtros combinados e contador por etapa; nada de outra carteira aparece. Prova: TDD 4 da SPEC-1-005 (CA-1-25).
   - [ ] Testar o funil e responder o questionário de produto @"José Linhares" !02/12/2026 #projeto
     > Sessão única da fase, de até 15 minutos: o José faz o roteiro de teste da SPEC-1-005 e responde ao questionário de produto.

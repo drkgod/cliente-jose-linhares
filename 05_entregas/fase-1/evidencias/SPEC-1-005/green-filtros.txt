@@ -1,0 +1,11 @@
+=== TDD4 GREEN — CA-1-25 — versao 17760be
+--- filtro faixa A + etapa em_pesquisa + origem planilha (carteira A)
+ total: 1 | contadores: {'em_pesquisa': 1, 'pronta_cadencia': 0, 'descartada': 0, 'nova': 0, 'priorizada': 0}
+  - Natura Cosmeticos | faixa A | etapa em_pesquisa | origem planilha
+--- funil da carteira B (nao pode mostrar nada da A)
+ total B: 6 | empresas: ['Laboratorios Aurora Cosmeticos Ltda', 'Bella Pele Industria e Comercio SA', 'VitaForm Manipulacao Ltda', 'Conta Secreta B1', 'Conta Secreta B2', 'Conta Secreta B3']
+ alguma conta da A aparece? nao
+--- funil sem carteira (esperado 400)
+{"data":{},"message":"Informe a carteira.","status":400} HTTP:400
+--- funil sem sessao (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403} HTTP:403
