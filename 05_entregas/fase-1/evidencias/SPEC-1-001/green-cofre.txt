@@ -1,0 +1,5 @@
+=== TDD4 GREEN: cofre lido por funcao do servidor
+{"configurado":true,"tamanho":31}
+HTTP:200
+=== o valor do segredo aparece em algum lugar do codigo do projeto?
+consulta feita no projeto Skip via ferramenta de arquivos: nenhuma ocorrencia de 'cofre-de-teste'

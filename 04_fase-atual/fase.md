@@ -33,13 +33,13 @@ tarefas que já têm um.
   > Call com o José: escopo final, as 5 SPECs da fase 1, Maestro ligado a este repositório e o que o José informa durante a construção. Ref.: SPEC-1-001.
   - [ ] Dar o aval no escopo final do projeto @"José Linhares" !16/11/2026 #projeto
     > Responder "aprovado" ao escopo final ou dizer o que falta ou sobra. Pode ser na call de 16/11. Ref.: SPEC-1-001 · CL-001.
-- [ ] Abrir o CRM da JLA no Skip com acesso só do José @"José Linhares" !18/11/2026 #projeto
+- [x] Abrir o CRM da JLA no Skip com acesso só do José @"José Linhares" !18/11/2026 #projeto
   > Projeto "JLA — CRM de prospecção" no Skip, só com login e só para o José. Fecha pela prova automática. Ref.: SPEC-1-001 (CA-1-01 a CA-1-04).
   - [ ] Entrar no Maestro e no Skip e informar o e-mail de acesso @"José Linhares" !17/11/2026 #projeto
     > Insumo do José (CL-002): entra no Maestro e no Skip e informa ao Maestro o e-mail que usa no Skip.
-  - [ ] Criar o projeto do CRM no Skip com login obrigatório @"José Linhares" !17/11/2026 #projeto
+  - [x] Criar o projeto do CRM no Skip com login obrigatório @"José Linhares" !17/11/2026 #projeto
     > Projeto novo com login e o menu Clientes, Contas e Funil ("em construção" até a sua SPEC). Prova: TDD 1 e 3 da SPEC-1-001 (CA-1-01, CA-1-03).
-  - [ ] Liberar o acesso só para o José e bloquear os demais @"José Linhares" !18/11/2026 #projeto
+  - [x] Liberar o acesso só para o José e bloquear os demais @"José Linhares" !18/11/2026 #projeto
     > Coleção acessos com o José como admin, regra no servidor em todas as coleções e cofre testado. Prova: TDD 2, 4 e 5 da SPEC-1-001 (CA-1-02, CA-1-04).
 - [ ] Cadastrar o cliente atendido e o perfil ideal sugerido por IA @"José Linhares" !23/11/2026 #projeto
   > Cada cliente com carteira própria; a IA sugere o perfil ideal pelo site e pelo cadastro e o José aprova. Fecha pela prova automática. Ref.: SPEC-1-002.

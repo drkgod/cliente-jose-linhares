@@ -1,0 +1,5 @@
+=== TDD3 GREEN: login do admin
+login ok: admin.jla@jla-teste.com.br | token len: 224
+=== admin lendo acessos (esperado 200 com 1 registro)
+{"items":[{"ativo":true,"collectionId":"pbc_4195937433","collectionName":"acessos","created":"2026-11-16 13:27:33.665Z","criado_em":"2026-11-16 13:27:33.665Z","email":"admin.jla@jla-teste.com.br","id":"v0lkvmt5kyon8ur","papel":"admin","updated":"2026-11-16 13:27:33.665Z"}],"page":1,"perPage":30,"totalItems":1,"totalPages":1}
+HTTP:200

@@ -1,0 +1,16 @@
+=== TDD 5 REGRESSAO (apos limpeza) — versao publicada 0a0d0f5
+--- 1) colecao de teste removida (esperado 404)
+{"data":{},"message":"Missing collection context.","status":404} HTTP:404
+--- 2) leitura anonima de acessos (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403} HTTP:403
+--- 3) leitura anonima de users (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403} HTTP:403
+--- 4) conta de teste removida (esperado 400)
+HTTP:400
+--- 5) rota do cofre de teste removida (esperado 404)
+HTTP:404
+--- 6) admin entra e le acessos
+login admin token: obtido
+{"items":[{"ativo":true,"collectionId":"pbc_4195937433","collectionName":"acessos","created":"2026-11-16 13:27:33.665Z","criado_em":"2026-11-16 13:27:33.665Z","email":"admin.jla@jla-teste.com.br","id":"v0lkvmt5kyon8ur","papel":"admin","updated":"2026-11-16 13:27:33.665Z"}],"page":1,"perPage":30,"totalItems":1,"totalPages":1} HTTP:200
+--- 7) app em producao
+producao HTTP:200

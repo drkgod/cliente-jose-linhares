@@ -1,0 +1,6 @@
+=== TDD1 RED: leitura anonima de teste_acesso (antes da RN-03)
+{"items":[{"collectionId":"pbc_1229967357","collectionName":"teste_acesso","created":"2026-11-16 13:24:20.675Z","id":"of01kr85yg6d60m","rotulo":"registro ficticio de teste","updated":"2026-11-16 13:24:20.675Z"}],"page":1,"perPage":30,"totalItems":1,"totalPages":1}
+HTTP:200
+=== tambem anonimo em acessos
+{"items":[],"page":1,"perPage":30,"totalItems":0,"totalPages":0}
+HTTP:200

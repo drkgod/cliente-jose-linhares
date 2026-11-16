@@ -1,0 +1,9 @@
+=== conta de teste lendo teste_acesso (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403}
+HTTP:403
+=== conta de teste lendo acessos (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403}
+HTTP:403
+=== anonimo (esperado 403)
+{"data":{},"message":"Acesso não liberado.","status":403}
+HTTP:403

@@ -11,7 +11,8 @@
   - pesquisa automática da conta priorizada, com briefing.
 - **Envios:** nesta fase nenhuma mensagem sai. Os envios começam na fase 3, com a autorização escrita do cliente teste.
 - **Teste do cliente:** só uma sessão com o José, no fim da SPEC-1-005, com o questionário de produto.
-- **Próxima ação:** SPEC-1-001, criar o projeto "JLA — CRM de prospecção" no Skip com login.
+- **SPEC-1-001 entregue (16/11):** CRM no Skip com login obrigatório, coleção `acessos`, guarda no servidor em todas as coleções e cofre testado (CA-1-01 a CA-1-04). No ar em https://projeto-native-60baf.goskip.app.
+- **Próxima ação:** SPEC-1-002, cliente atendido e perfil ideal sugerido por IA.
 - **Call de validação da fase 1:** 03/12/2026.
 
 ## Dúvidas para a consultoria
