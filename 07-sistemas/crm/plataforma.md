@@ -10,6 +10,8 @@
 - versao_publicada: nenhuma — produção ainda não publicada
 - ultima_task: nenhuma
 - registrado_em: 2026-11-16
+- observacao_de_nome: `STATUS.md` e `04_fase-atual/fase.md` citam o projeto "JLA — CRM de prospecção" no Skip. Em 16/11/2026 o José decidiu construir o sistema no projeto "Projeto Native" (id 78281); este arquivo é a fonte da verdade sobre onde o sistema roda.
+
 - espelho: `codigo/` guarda a última versão de cada arquivo alterado pelas tasks. É cópia de
   consulta; a fonte executável é o Skip. Nunca edite o espelho para mudar o sistema.
 
