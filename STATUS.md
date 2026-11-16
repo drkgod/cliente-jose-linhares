@@ -18,3 +18,8 @@
 ## Dúvidas para a consultoria
 
 Nenhuma.
+
+## SPEC-1-003 — entregue em 16/11/2026
+
+- Versão publicada `e17e436`. CA-1-10 a CA-1-15 provados; provas em `05_entregas/fase-1/evidencias/SPEC-1-003/`.
+- Fecha pela prova automática (D-07). Próxima: SPEC-1-004.

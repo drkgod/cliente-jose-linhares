@@ -53,17 +53,17 @@ tarefas que já têm um.
     > A IA lê o site e o cadastro e propõe empresa-alvo, porte, cargos, prioridade e exclusões, com a fonte de cada item. Prova: TDD 3 da SPEC-1-002 (CA-1-07).
   - [x] Aprovar, ajustar e versionar o perfil ideal @"José Linhares" !23/11/2026 #projeto
     > O perfil fica "sugerido" até o José aprovar; ajuste vira versão nova; só o aprovado vale na triagem. Prova: TDD 4 e 5 da SPEC-1-002 (CA-1-08, CA-1-09).
-- [ ] Buscar contas sozinho pelas APIs e dar nota com o motivo @"José Linhares" !26/11/2026 #projeto
+- [x] Buscar contas sozinho pelas APIs e dar nota com o motivo @"José Linhares" !26/11/2026 #projeto
   > Com o perfil aprovado, o sistema puxa contas da Anvisa, do CNPJ e da Apollo toda semana e dá nota com motivo. Ref.: SPEC-1-003 (CA-1-10 a CA-1-15).
   - [ ] Guardar a chave da Apollo no cofre do Skip @"José Linhares" !20/11/2026 #projeto
     > Insumo do José (CL-010): criar a conta gratuita na Apollo e colar a chave como APOLLO_API_KEY direto no cofre do Skip, nunca no chat.
   - [ ] Enviar ao Maestro a primeira lista de contas do cliente teste @"José Linhares" !20/11/2026 #projeto
     > Insumo opcional do José (CL-004): planilha com empresas que ele já quer na lista. O Maestro não espera: a busca automática segue.
-  - [ ] Buscar contas nas APIs a partir do perfil aprovado @"José Linhares" !23/11/2026 #projeto
+  - [x] Buscar contas nas APIs a partir do perfil aprovado @"José Linhares" !23/11/2026 #projeto
     > Busca disparada pela aprovação, por botão e toda segunda; junta as fontes sem duplicar e registra cada execução. Prova: TDD 1 e 2 da SPEC-1-003.
-  - [ ] Completar porte e atividade pelos dados abertos do CNPJ @"José Linhares" !24/11/2026 #projeto
+  - [x] Completar porte e atividade pelos dados abertos do CNPJ @"José Linhares" !24/11/2026 #projeto
     > Consulta aberta por CNPJ: porte, capital, CNAE, situação e cidade; falha vira "pendente de dados". Prova: TDD 3 da SPEC-1-003 (CA-1-12, CA-1-15).
-  - [ ] Calcular a nota sozinho a cada conta nova, com o motivo @"José Linhares" !26/11/2026 #projeto
+  - [x] Calcular a nota sozinho a cada conta nova, com o motivo @"José Linhares" !26/11/2026 #projeto
     > Regras do perfil viram pontos; a conta mostra nota, faixa e motivo; fora do perfil fica com motivo. Prova: TDD 4 e 5 da SPEC-1-003 (CA-1-13, CA-1-14).
 - [ ] Pesquisar sozinho cada conta priorizada e escrever o briefing @"José Linhares" !30/11/2026 #projeto
   > Conta em Prioridade é pesquisada sozinha: maturidade digital do site, decisores e briefing de abertura pela IA. Ref.: SPEC-1-004 (CA-1-16 a CA-1-20).

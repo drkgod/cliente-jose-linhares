@@ -1,0 +1,13 @@
+linhas em buscas: 0
+=== TDD2/CA-1-10 e CA-1-11 — versao e17e436
+1a: {"novas":3,"repetidas":0,"fontes":[{"falhas":0,"cota":0,"erro":"","inicio":"2026-11-16T23:08:29.712Z","fonte":"apollo_simulado","encontradas":3},{"falhas":1,"cota":0,"erro":"fonte fora do ar (404)","inicio":"2026-11-16T23:08:29.712Z","fonte":"anvisa","encontradas":0}]}
+2a: {"novas":0,"repetidas":3,"fontes":[{"fonte":"apollo_simulado","encontradas":3,"falhas":0,"cota":0,"erro":"","inicio":"2026-11-16T23:08:30.176Z"},{"erro":"fonte fora do ar (404)","inicio":"2026-11-16T23:08:30.176Z","fonte":"anvisa","encontradas":0,"falhas":1,"cota":0}]}
+contas na carteira: 3
+
+=== CORRECAO DO GATILHO (versao e17e436)
+Na versao e17e436 o hook onRecordAfterUpdateSuccess nao disparava a busca. A chamada foi
+movida para dentro da propria rota de aprovacao, que agora devolve busca_disparada: true.
+Prova (carteira zzxhhjpmx3suutp):
+ - apollo_simulado | gatilho aprovacao | encontradas 3 | novas 3 | repetidas 0 | falhas 0
+ - anvisa | gatilho aprovacao | encontradas 0 | falhas 1 | erro "fonte fora do ar (404)"
+   -> CA-1-15: uma fonte caiu, a outra seguiu e nenhuma conta foi descartada.

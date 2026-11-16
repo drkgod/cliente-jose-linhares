@@ -1,0 +1,8 @@
+=== TDD5 REGRESSAO — versao e17e436
+1) Reexecucao: 1a busca novas=3 repetidas=0; 2a busca novas=0 repetidas=3; total de contas
+   da carteira nao cresceu (indice unico cliente+chave). CA-1-11 ok.
+2) Fonte fora do ar: Anvisa respondeu 404 e ficou registrada em buscas com falhas=1 e erro
+   "fonte fora do ar (404)"; Apollo seguiu e trouxe 3 contas. CA-1-15 ok.
+3) CNPJ real: Petrobras, Magazine Luiza e Ambev completados com porte, CNAE, situacao,
+   cidade/UF e data da consulta (brasilapi). CA-1-12 ok.
+4) Carteiras e contas ficticias removidas ao fim das provas.

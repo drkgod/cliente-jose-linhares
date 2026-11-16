@@ -1,0 +1,5 @@
+=== TDD1 RED: por que a chave unica e necessaria
+Antes do indice unico (cliente, chave), rodar a busca duas vezes criava 2x as mesmas 3
+empresas do simulador: o mesmo CNPJ/dominio entrava como conta nova em cada execucao.
+Prova do controle atual: as duas execucoes acima devolvem repetidas>0 e o total de contas
+da carteira nao cresce na segunda.

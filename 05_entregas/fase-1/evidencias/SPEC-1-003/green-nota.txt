@@ -1,0 +1,21 @@
+=== TDD4 GREEN: nota e triagem (CA-1-13, CA-1-14) — versao e17e436
+Ambev SA | nota 0 | faixa C | soma motivos 0 | triagem fora_do_perfil
+      Nenhum critério do perfil encontrado -> 0
+Magazine Luiza SA | nota 0 | faixa C | soma motivos 0 | triagem fora_do_perfil
+      Nenhum critério do perfil encontrado -> 0
+Petrobras SA | nota 0 | faixa C | soma motivos 0 | triagem fora_do_perfil
+      Nenhum critério do perfil encontrado -> 0
+VitaForm Manipulacao Ltda | nota 0 | faixa C | soma motivos 0 | triagem pendente_dados
+      Sem dados do CNPJ -> 0
+Bella Pele Industria e Comercio SA | nota 0 | faixa C | soma motivos 0 | triagem pendente_dados
+      Sem dados do CNPJ -> 0
+Laboratorios Aurora Cosmeticos Ltda | nota 0 | faixa C | soma motivos 0 | triagem pendente_dados
+      Sem dados do CNPJ -> 0
+
+=== CA-1-13 PROVADO (nota = soma dos motivos)
+Natura Cosmeticos Industria | nota 100 | faixa A | soma motivos 100 | triagem prioridade
+      cosmeticos -> 50
+      industria -> 50
+Supermercado Sem Ecommerce Ltda | nota 0 | faixa C | triagem fora_do_perfil
+      Exclusão do perfil: sem ecommerce -> 0     (RN-11 — CA-1-14)
+Contas sem CNPJ (simulador Apollo) | triagem pendente_dados | motivo "Sem dados do CNPJ" (RN-09)

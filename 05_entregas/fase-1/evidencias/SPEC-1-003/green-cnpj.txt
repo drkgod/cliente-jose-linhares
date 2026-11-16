@@ -1,0 +1,8 @@
+=== TDD3 GREEN: CNPJ e falhas (CA-1-12, CA-1-15) — versao e17e436
+--- importar 3 CNPJs publicos reais pela planilha
+{"novas":3,"repetidas":0,"erros":[]}
+--- contas completadas pelo CNPJ
+Ambev SA | cnpj 07526557000100 | porte DEMAIS | cnae Fabricação de cervejas e chopes (1113502) | situacao ATIVA | cidade SAO PAULO SP | consultado 2026-11-16 23:08:31.254Z
+Magazine Luiza SA | cnpj 47960950000121 | porte DEMAIS | cnae Lojas de departamentos ou magazines, exceto lojas  | situacao ATIVA | cidade FRANCA SP | consultado 2026-11-16 23:08:30.960Z
+Petrobras SA | cnpj 33000167000101 | porte DEMAIS | cnae Extração de petróleo e gás natural (600001) | situacao ATIVA | cidade RIO DE JANEIRO RJ | consultado 2026-11-16 23:08:30.668Z
+--- fonte fora do ar simulada: Anvisa registrou falha? (ver buscas)
