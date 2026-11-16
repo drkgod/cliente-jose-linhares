@@ -1,0 +1,27 @@
+=== TDD2/3/4 GREEN — CA-1-16 a CA-1-19 — versao ed42afa
+--- conta: RD Station (id 7uxkjabdw5zd4v9)
+ status: ok | feito_em: 2026-11-16 23:27:55.307Z | motivo: -
+   crm = sim | evidencia: script/menção no HTML: rdstation
+   pixel = nao | evidencia: nenhum marcador encontrado no HTML de https://www.rdstation.com (há scripts, nenhum de CRM)
+   automacao = sim | evidencia: script/menção no HTML: rdstation
+ decisores: 3
+   - Ana RD | Diretora de Marketing | director | fonte apollo_simulado
+   - Carlos RD | Diretor Comercial | director | fonte apollo_simulado
+   - Marina RD | CEO | c_suite | fonte apollo_simulado
+   dor_provavel -> Falta de automação de marketing e vendas, resultando em baixa geração e qualificação de leads para l | fonte: site
+   gatilho -> A RD Station já oferece CRM e automação, indicando que a empresa tem maturidade digital e está busca | fonte: site
+   abordagem -> Apresentar a Carteira Prova Maturidade como um diagnóstico avançado que complementa o RD Marketing,  | fonte: site
+ concluido em: 2026-11-16 23:27:55.307Z (CA-1-16: data presente)
+--- conta: Gov BR (id p1ehsfkmwrxjapi)
+ status: ok | feito_em: 2026-11-16 23:28:04.619Z | motivo: -
+   crm = nao | evidencia: nenhum marcador encontrado no HTML de https://www.gov.br (há scripts, nenhum de CRM)
+   pixel = sim | evidencia: script/menção no HTML: connect.facebook.net
+   automacao = sim | evidencia: script/menção no HTML: whatsapp
+ decisores: 3
+   - Ana Gov | Diretora de Marketing | director | fonte apollo_simulado
+   - Carlos Gov | Diretor Comercial | director | fonte apollo_simulado
+   - Marina Gov | CEO | c_suite | fonte apollo_simulado
+   dor_provavel -> Ausência de CRM para gestão de leads e relacionamento com fornecedores de cosméticos | fonte: site
+   gatilho -> Presença de Facebook Pixel e automação via WhatsApp sem integração a uma plataforma de CRM | fonte: site
+   abordagem -> Propor implantação de um CRM integrado com automação de marketing (Facebook Pixel, WhatsApp) para me | fonte: site
+ concluido em: 2026-11-16 23:28:04.619Z (CA-1-16: data presente)

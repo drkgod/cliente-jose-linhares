@@ -1,0 +1,12 @@
+=== TDD4 GREEN — CA-1-20: falhas e correcao (versao ed42afa)
+1) Site nao lido -> pesquisa "parcial" com motivo "site nao lido"; nenhum item vira sim/nao (RN-16).
+2) Apollo sem chave -> decisores do simulador no mesmo formato, com fonte declarada.
+3) IA fora do ar (simulada no codigo) -> briefing sai do simulador, motivo "IA fora do ar",
+   e a pesquisa fica "parcial", elegivel para a retentativa horaria.
+4) Correcao do Jose preservada (RN-19):
+   antes:  crm = nao_lido
+   corrigir crm = "sim"  ->  {"ok":true}
+   pesquisar de novo
+   depois: crm = sim | evidencia: "corrigido por Jose" | corrigido_por_jose: true | tentativas: 2
+5) CA-1-18: campos da colecao decisores = ativo, cargo, cliente, conta, corrigido, fonte,
+   nome, senioridade. Nenhum campo de e-mail ou telefone.

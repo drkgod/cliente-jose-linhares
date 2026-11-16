@@ -65,15 +65,15 @@ tarefas que já têm um.
     > Consulta aberta por CNPJ: porte, capital, CNAE, situação e cidade; falha vira "pendente de dados". Prova: TDD 3 da SPEC-1-003 (CA-1-12, CA-1-15).
   - [x] Calcular a nota sozinho a cada conta nova, com o motivo @"José Linhares" !26/11/2026 #projeto
     > Regras do perfil viram pontos; a conta mostra nota, faixa e motivo; fora do perfil fica com motivo. Prova: TDD 4 e 5 da SPEC-1-003 (CA-1-13, CA-1-14).
-- [ ] Pesquisar sozinho cada conta priorizada e escrever o briefing @"José Linhares" !30/11/2026 #projeto
+- [x] Pesquisar sozinho cada conta priorizada e escrever o briefing @"José Linhares" !30/11/2026 #projeto
   > Conta em Prioridade é pesquisada sozinha: maturidade digital do site, decisores e briefing de abertura pela IA. Ref.: SPEC-1-004 (CA-1-16 a CA-1-20).
-  - [ ] Ler o site e marcar a maturidade digital com evidência @"José Linhares" !27/11/2026 #projeto
+  - [x] Ler o site e marcar a maturidade digital com evidência @"José Linhares" !27/11/2026 #projeto
     > CRM, pixel e automação lidos no site com a evidência; sem evidência fica "não lido". Prova: TDD 1 e 2 da SPEC-1-004 (CA-1-16, CA-1-17).
-  - [ ] Trazer os decisores da conta pela busca de pessoas @"José Linhares" !27/11/2026 #projeto
+  - [x] Trazer os decisores da conta pela busca de pessoas @"José Linhares" !27/11/2026 #projeto
     > Até 5 decisores com nome, cargo e fonte pela Apollo, sem e-mail e sem telefone. Prova: TDD 2 da SPEC-1-004 (CA-1-18).
-  - [ ] Escrever o briefing de abertura com IA e as fontes @"José Linhares" !28/11/2026 #projeto
+  - [x] Escrever o briefing de abertura com IA e as fontes @"José Linhares" !28/11/2026 #projeto
     > Dor provável, gatilho e abordagem com as fontes; dor sem fonte fica "a confirmar". Prova: TDD 3 da SPEC-1-004 (CA-1-19).
-  - [ ] Encadear a pesquisa com fila, limite diário e nova tentativa @"José Linhares" !30/11/2026 #projeto
+  - [x] Encadear a pesquisa com fila, limite diário e nova tentativa @"José Linhares" !30/11/2026 #projeto
     > Fila com limite de 25 por dia, nova tentativa automática e correção do José mantida. Prova: TDD 4 e 5 da SPEC-1-004 (CA-1-20).
 - [ ] Mostrar as contas no funil visual do CRM @"José Linhares" !02/12/2026 #projeto
   > Funil por cliente com etapa, nota, briefing, histórico e motivo. No fim, o único teste da fase com o José e o questionário de produto. Ref.: SPEC-1-005.

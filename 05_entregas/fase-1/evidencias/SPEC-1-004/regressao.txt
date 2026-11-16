@@ -1,0 +1,8 @@
+=== TDD5 REGRESSAO — versao ed42afa
+1) Duas contas reais pesquisadas de ponta a ponta (RD Station e Gov BR): maturidade coerente com o
+   HTML de cada site, decisores com nome/cargo/fonte e briefing vindo da IA com fonte por item.
+2) Uma conta sem site legivel (Natura) ficou "parcial" com tudo "nao_lido", sem chute.
+3) Nenhuma conta ficticia permaneceu: as carteiras de prova foram removidas ao fim
+   (HTTP 204 no DELETE), e o cascade levou contas, pesquisas e decisores.
+4) A nota da conta e recalculada com a maturidade (RN-17): cada "sim" soma 5 pontos e aparece
+   como motivo "Maturidade: ...", limitada a 100.

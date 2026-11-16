@@ -1,0 +1,21 @@
+=== TDD1 RED — maturidade sem evidencia (versao ed42afa)
+O comportamento antigo (antes da RN-16) marcava "nao" quando o site nao podia ser lido, porque
+o detector so olhava o HTML e nao distinguia "nao achei o marcador" de "nao consegui ler".
+
+Prova do controle atual: com o site ilegivel, TODOS os itens ficam "nao_lido" com a evidencia
+declarada, nunca "sim" nem "nao":
+
+  conta "Site so JavaScript" (angular.io)
+  crm = nao_lido | evidencia: site nao respondeu
+  pixel = nao_lido | evidencia: site nao respondeu
+  automacao = nao_lido | evidencia: site nao respondeu
+
+E com o site lido:
+  RD Station: crm=sim (rdstation), pixel=nao (nenhum marcador), automacao=sim (rdstation)
+  Gov BR:     crm=nao (nenhum marcador), pixel=sim (connect.facebook.net), automacao=sim (whatsapp)
+
+=== DESCOBERTA TECNICA (registrada)
+O TextDecoder do JSVM do PocketBase recusa o corpo do $http.send
+("expected ArrayBuffer, TypedArray, or DataView"). A leitura passou a usar o plano B:
+converter os bytes com String.fromCharCode, que funciona. O diagnostico (site_diag) fica na
+resposta para futuras investigacoes.

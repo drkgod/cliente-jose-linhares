@@ -1,0 +1,18 @@
+=== TDD3 GREEN — CA-1-19: briefing com fontes (versao ed42afa)
+RD Station
+  dor_provavel -> "Falta de automacao de marketing e vendas, resultando em baixa geracao..."
+                  fonte: site     -> com fonte, aparece como veio da IA
+  gatilho       -> "A RD Station ja oferece CRM e automacao, indicando maturidade digital..."
+                  fonte: site
+  abordagem     -> "Apresentar a Carteira Prova Maturidade como um diagnostico avancado..."
+                  fonte: site
+
+Gov BR
+  dor_provavel -> "Ausencia de CRM para gestao de leads e relacionamento..."
+                  fonte: site
+  gatilho       -> "Presenca de Facebook Pixel e automacao via WhatsApp sem integracao..."
+                  fonte: site
+
+=== RN-18: dor sem fonte fica "a confirmar"
+Na conta sem site legivel (Natura, sem dominio valido) a IA devolveu a dor sem fonte e o
+registro ficou: dor_provavel = "A confirmar" | fonte: "" (nada inventado).
