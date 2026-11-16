@@ -11,8 +11,8 @@ Decisões já combinadas com o José. As SPECs citam cada uma pelo ID.
 | D-05 | Nas primeiras semanas do cliente teste, o José aprova cada mensagem. Depois, a aprovação passa a ser por modelo. | 3 |
 | D-06 | O começo é no gratuito. O celular direto, plano pago, só entra quando o cliente teste pagar. | 1 |
 | D-07 | Teste do cliente só no fim da SPEC que tem tela para ele, com questionário de produto. As outras SPECs fecham pela prova automática. | 1 |
-| D-08 | Dados de empresa vêm da consulta aberta de CNPJ (BrasilAPI), com a Minha Receita como plano B. Nada pago. | 1 |
-| D-09 | Sem lista do José, a primeira lista vem dos dados abertos de fabricantes da Anvisa, com fonte e data registradas. | 1 |
+| D-08 | As fontes da fase 1 são gratuitas: dados abertos da Anvisa, consulta aberta de CNPJ (OpenCNPJ ou BrasilAPI) e a busca de empresas e de pessoas da Apollo (nome e cargo, sem crédito). Nada pago, sempre dentro da cota. | 1 |
+| D-09 | Para o cliente teste, a busca começa pelos dados abertos de fabricantes da Anvisa, com fonte e data registradas. | 1 |
 | D-10 | Cadências: três trilhas separadas, no máximo um toque por dia e parada na primeira resposta ou pedido de saída. No LinkedIn, cerca de 7 convites por dia útil. O WhatsApp usa sempre um número separado. | 3 |
 | D-11 | O lead qualificado (SQL) segue o critério combinado com o closer e é confirmado pelo retorno dele. | 4 |
 | D-12 | O Sales Navigator é opcional. As buscas dele podem virar lista de entrada, e a decisão de manter vem depois do cliente teste. | 2 |

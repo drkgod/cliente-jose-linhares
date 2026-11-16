@@ -1,7 +1,7 @@
-# SPEC-1-004 — Funil visual do CRM com histórico
+# SPEC-1-005 — Funil visual do CRM com histórico e fila do José
 
 **Fase:** 1 · **Status:** pronta para construir · **Dono:** José Linhares (com o Maestro) · aceite: consultor Rodrigo Santos
-**Origem no escopo:** funcionalidade 4.8 e regras 3 e 8 · decisões D-03 e D-07
+**Origem no escopo:** funcionalidade 4.8 e regras 3 e 8 · fluxo 7.2 (trabalho diário) · decisões D-03 e D-07
 **Degrau da solução:** nativo da plataforma. Telas e coleções do Skip, sem biblioteca de CRM externa.
 
 ## Contexto e decisões fechadas
@@ -39,12 +39,12 @@ Na tela Funil, o José escolhe o cliente teste e vê as colunas com os cartões,
   - etapas de cadência e reunião (fases 3 e 4);
   - relatório e mapa de jornada (fase 5);
   - busca em linguagem natural (fase 5).
-- **Entradas:** as contas com nota (SPEC-1-003).
+- **Entradas:** as contas com nota (SPEC-1-003) e a pesquisa de cada uma (SPEC-1-004).
 - **Saídas:**
   - o funil do cliente teste;
-  - as provas em `05_entregas/fase-1/evidencias/SPEC-1-004/`;
+  - as provas em `05_entregas/fase-1/evidencias/SPEC-1-005/`;
   - as respostas do questionário em `06_notas/preferencias-do-jose.md`.
-- **Dependência:** SPEC-1-003.
+- **Dependência:** SPEC-1-004.
 - **Risco e plano B:** se arrastar não funcionar bem no Skip, o cartão ganha um seletor de etapa, com a mesma regra e o mesmo histórico.
 
 ## Dados e integrações
@@ -64,7 +64,7 @@ Na tela Funil, o José escolhe o cliente teste e vê as colunas com os cartões,
 
 1. Criar `historico_contas`, que só acrescenta, com a regra de acesso e o filtro por carteira.
 2. Criar a tela Funil: seletor de cliente, colunas, cartões ordenados por nota e contador por coluna.
-3. Criar a ficha: dados da conta, motivo da nota (SPEC-1-003), histórico e campo de anotação.
+3. Criar a ficha: dados da conta, motivo da nota (SPEC-1-003), pesquisa e briefing (SPEC-1-004), histórico e campo de anotação.
 4. Mover por arrastar ou pelo seletor, com motivo obrigatório para descartar (RN-14).
 5. Criar os filtros por faixa, etapa e origem.
 6. Fazer a sessão do fim da SPEC com o José, conforme a seção "Teste humano do cliente".
@@ -77,7 +77,7 @@ Na tela Funil, o José escolhe o cliente teste e vê as colunas com os cartões,
 
 ## Instruções de execução para o Maestro
 
-- **Ler antes de alterar:** esta SPEC, `AGENTS.md` e o que as SPECs 1-002 e 1-003 já criaram.
+- **Ler antes de alterar:** esta SPEC, `AGENTS.md` e o que as SPECs 1-002 a 1-004 já criaram.
 - **Alterar somente:** o projeto "JLA — CRM de prospecção", `07-sistemas/` e `06_notas/preferencias-do-jose.md`.
 - **Ordem:** passos 1 a 5, depois o TDD, e só então a sessão com o José (passo 6).
 - **Parar quando:** uma resposta do questionário pedir etapa, regra ou dado fora desta SPEC. Registre como `DÚVIDA:` no `STATUS.md` e não implemente.
@@ -90,25 +90,25 @@ Na tela Funil, o José escolhe o cliente teste e vê as colunas com os cartões,
 - [ ] Mover com motivo para descartar.
 - [ ] Filtros.
 - [ ] Sessão do José feita e respostas registradas.
-- [ ] Provas em `05_entregas/fase-1/evidencias/SPEC-1-004/`.
+- [ ] Provas em `05_entregas/fase-1/evidencias/SPEC-1-005/`.
 
 ## Critérios de aceite
 
-- **CA-1-16:** o funil do cliente teste mostra as 5 etapas, e o contador de cada uma é igual ao número de contas da lista com o mesmo filtro.
-- **CA-1-17:** a ficha mostra os dados da conta, a nota com os motivos e o histórico em ordem de data.
-- **CA-1-18:** mover uma conta grava uma linha no histórico. Descartar sem motivo é recusado.
-- **CA-1-19:** uma anotação à mão, como um contato vindo de outro canal, aparece no histórico com data.
-- **CA-1-20:** os filtros por faixa, etapa e origem funcionam combinados, e nenhum registro de outra carteira aparece.
+- **CA-1-21:** o funil do cliente teste mostra as 5 etapas, e o contador de cada uma é igual ao número de contas da lista com o mesmo filtro.
+- **CA-1-22:** a ficha mostra os dados da conta, a nota com os motivos e o histórico em ordem de data.
+- **CA-1-23:** mover uma conta grava uma linha no histórico. Descartar sem motivo é recusado.
+- **CA-1-24:** uma anotação à mão, como um contato vindo de outro canal, aparece no histórico com data.
+- **CA-1-25:** os filtros por faixa, etapa e origem funcionam combinados, e nenhum registro de outra carteira aparece.
 
 ## TDD da SPEC
 
 | # | Etapa | Prova | Comando/ação | Resultado esperado | Evidência |
 |---|---|---|---|---|---|
 | 1 | RED | Contador sem regra | Comparar o contador com a lista antes do cálculo no servidor | Diferença ou dado de outra carteira, o que mostra a falha | `red.txt` |
-| 2 | GREEN | Funil e ficha | Abrir o funil e 3 fichas do cliente teste | Contadores iguais à lista, ficha completa (CA-1-16, CA-1-17) | `green-funil.txt` e capturas |
-| 3 | GREEN | Mover e anotar | Mover 2 contas, tentar descartar sem motivo, descartar com motivo e anotar 1 contato | Histórico com 4 linhas e a recusa registrada (CA-1-18, CA-1-19) | `green-historico.txt` |
-| 4 | GREEN | Filtros | Combinar faixa A, etapa Priorizada e origem planilha; repetir com o cliente fictício B | Só as contas certas, e nada de B (CA-1-20) | `green-filtros.txt` |
-| 5 | REGRESSÃO | Navegador automatizado | Percorrer as SPECs 1-001 a 1-004 de ponta a ponta e remover o cliente B | Tudo funciona e nada de teste sobra | `regressao.txt` |
+| 2 | GREEN | Funil e ficha | Abrir o funil e 3 fichas do cliente teste | Contadores iguais à lista, ficha completa (CA-1-21, CA-1-22) | `green-funil.txt` e capturas |
+| 3 | GREEN | Mover e anotar | Mover 2 contas, tentar descartar sem motivo, descartar com motivo e anotar 1 contato | Histórico com 4 linhas e a recusa registrada (CA-1-23, CA-1-24) | `green-historico.txt` |
+| 4 | GREEN | Filtros | Combinar faixa A, etapa Priorizada e origem planilha; repetir com o cliente fictício B | Só as contas certas, e nada de B (CA-1-25) | `green-filtros.txt` |
+| 5 | REGRESSÃO | Navegador automatizado | Percorrer as SPECs 1-001 a 1-005 de ponta a ponta e remover o cliente B | Tudo funciona e nada de teste sobra | `regressao.txt` |
 
 **Dados e fixtures:** o cliente fictício B com 3 contas, removido no fim.
 
@@ -125,7 +125,7 @@ Na tela Funil, o José escolhe o cliente teste e vê as colunas com os cartões,
 **Roteiro:**
 1. Entrar no sistema.
 2. Abrir o cliente teste e ver o perfil ideal aprovado.
-3. Em Contas, ver a melhor conta e o motivo da nota.
+3. Em Contas, ver as contas que chegaram sozinhas, a melhor delas, o motivo da nota e o briefing.
 4. No Funil, mover uma conta para "Em pesquisa" e anotar algo.
 5. Descartar uma conta com motivo.
 6. Filtrar pela faixa A.
@@ -140,7 +140,7 @@ Registre as respostas em `06_notas/preferencias-do-jose.md`. O que couber nesta 
 
 ## Handoff e operação
 
-- **Demonstrar:** o roteiro acima, na call de validação de 02/12.
+- **Demonstrar:** o roteiro acima, na call de validação de 03/12.
 - **Operar:** o José abre o funil todo dia para decidir as próximas contas.
 - **Monitorar:** quantidade de contas paradas em "Nova" há mais de 7 dias.
 
@@ -150,10 +150,10 @@ Status, responsável e prazo ficam só em `04_fase-atual/fase.md`.
 
 | Task | Critério | Prova |
 |---|---|---|
-| Mostrar as contas no funil visual do CRM | CA-1-16 a CA-1-20 | TDD 1 a 5 |
-| Montar o funil com as etapas e a ficha da conta | CA-1-16, CA-1-17 | TDD 1 e 2 |
-| Mover contas entre etapas e anotar à mão com histórico | CA-1-18, CA-1-19 | TDD 3 |
-| Filtrar por cliente, faixa de nota, etapa e origem | CA-1-20 | TDD 4 |
+| Mostrar as contas no funil visual do CRM | CA-1-21 a CA-1-25 | TDD 1 a 5 |
+| Montar o funil com as etapas e a ficha da conta | CA-1-21, CA-1-22 | TDD 1 e 2 |
+| Mover contas entre etapas e anotar à mão com histórico | CA-1-23, CA-1-24 | TDD 3 |
+| Filtrar por cliente, faixa de nota, etapa e origem | CA-1-25 | TDD 4 |
 | Testar o funil e responder o questionário de produto | sessão do fim da SPEC | registro em `06_notas/preferencias-do-jose.md` |
 | Validar a fase 1 com o José | gate da fase | aceite do consultor |
 

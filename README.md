@@ -22,7 +22,7 @@ Este repositório é o lugar de trabalho do Maestro do José: tarefas, SPECs e p
 | `04_fase-atual/specs/` | SPECs da fase 1. Índice em `00-INDICE.md`. |
 | `05_entregas/fase-1/` | Provas de cada SPEC (RED, GREEN e regressão). |
 | `06_notas/decisoes-do-projeto.md` | Decisões já combinadas (D-01 a D-14), citadas nas SPECs. |
-| `06_notas/insumos-do-jose.md` | O que só o José entrega ou decide (CL-001 a CL-009) e a situação de cada item. |
+| `06_notas/insumos-do-jose.md` | O que só o José entrega ou decide (CL-001 a CL-010) e a situação de cada item. |
 | `06_notas/preferencias-do-jose.md` | Respostas do José ao questionário de produto do fim da SPEC. |
 | `07-sistemas/` | Registro do projeto do Skip criado pelo Maestro. |
 | `.adapta-cliente/estado-atual.md` | Estado do agente: tarefa em construção, etapa e próxima ação. |
@@ -31,8 +31,8 @@ Este repositório é o lugar de trabalho do Maestro do José: tarefas, SPECs e p
 
 | Fase | Entrega | Situação |
 |---|---|---|
-| 1 | CRM no Skip com acesso protegido; cliente atendido e perfil ideal sugerido por IA; contas por planilha e dados abertos com nota e motivo; funil visual | em construção de 16/11 a 02/12/2026 |
-| 2 | Maturidade digital, pesquisa da conta e briefing, decisores e e-mails validados, sinais de mercado | a consultoria libera depois |
+| 1 | Motor automático sem envio: CRM no Skip; perfil ideal por IA; busca semanal de contas pelas APIs (Anvisa, CNPJ e Apollo) com nota e motivo; pesquisa automática (maturidade digital, decisores e briefing por IA); funil | em construção de 16/11 a 03/12/2026 |
+| 2 | E-mails dos decisores validados, celular direto quando pago, sinais de mercado mensais, Sales Navigator opcional | a consultoria libera depois |
 | 3 | Cadências nos três canais com freio, lista única de saída e formulário de lead quente (só com a autorização escrita do cliente) | depois |
 | 4 | Agente de respostas pelo playbook, qualificação, agendamento com o aval do José e resumo ao closer | depois |
 | 5 | Números por cliente, canal e lista, mapa da jornada, busca inteligente, loops e validação ponta a ponta | depois |

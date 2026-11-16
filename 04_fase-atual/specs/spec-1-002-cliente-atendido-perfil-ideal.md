@@ -34,8 +34,8 @@
   - a sugestão por IA;
   - a aprovação e as versões.
 - **Fora de escopo:**
-  - busca de contas (SPEC-1-003);
-  - pesquisa da conta e briefing (fase 2);
+  - busca automática de contas (SPEC-1-003);
+  - pesquisa da conta e briefing (SPEC-1-004);
   - contas de envio do cliente (fase 3).
 - **Entradas:**
   - os dados do cliente teste (CL-003);
@@ -129,7 +129,7 @@
 
 ## Teste humano do cliente
 
-Sem sessão própria (D-07). O José vê o cadastro e o perfil na sessão única do fim da SPEC-1-004.
+Sem sessão própria (D-07). O José vê o cadastro e o perfil na sessão única do fim da SPEC-1-005.
 
 ## Handoff e operação
 

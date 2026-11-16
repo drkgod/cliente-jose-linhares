@@ -32,7 +32,7 @@ O José abre o endereço do sistema, faz login e vê a tela inicial "JLA — CRM
 - **Fora de escopo:**
   - acesso do parceiro de comunicação (fase 3);
   - outros papéis;
-  - conteúdo das telas (SPECs 1-002 a 1-004);
+  - conteúdo das telas (SPECs 1-002 a 1-005);
   - domínio próprio.
 - **Entradas:** login do José no Maestro e no Skip, e o e-mail que ele usa no Skip (CL-002).
 - **Saídas:**
@@ -123,7 +123,7 @@ O José abre o endereço do sistema, faz login e vê a tela inicial "JLA — CRM
 
 ## Teste humano do cliente
 
-Sem sessão própria (D-07). Esta SPEC fecha pela prova automática. O José vê o login e o menu na sessão única do fim da SPEC-1-004.
+Sem sessão própria (D-07). Esta SPEC fecha pela prova automática. O José vê o login e o menu na sessão única do fim da SPEC-1-005.
 
 ## Handoff e operação
 

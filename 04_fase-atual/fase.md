@@ -30,7 +30,7 @@ sincronização e voltam aqui com o `<!-- id:… -->` preenchido. **Não apague 
 tarefas que já têm um.
 
 - [ ] Começar a construção da fase 1 na call de 16/11 @"Rodrigo Santos" !16/11/2026 #projeto
-  > Call com o José: escopo final, as 4 SPECs da fase 1, Maestro ligado a este repositório e o que o José informa durante a construção. Ref.: SPEC-1-001.
+  > Call com o José: escopo final, as 5 SPECs da fase 1, Maestro ligado a este repositório e o que o José informa durante a construção. Ref.: SPEC-1-001.
   - [ ] Dar o aval no escopo final do projeto @"José Linhares" !16/11/2026 #projeto
     > Responder "aprovado" ao escopo final ou dizer o que falta ou sobra. Pode ser na call de 16/11. Ref.: SPEC-1-001 · CL-001.
 - [ ] Abrir o CRM da JLA no Skip com acesso só do José @"José Linhares" !18/11/2026 #projeto
@@ -53,25 +53,37 @@ tarefas que já têm um.
     > A IA lê o site e o cadastro e propõe empresa-alvo, porte, cargos, prioridade e exclusões, com a fonte de cada item. Prova: TDD 3 da SPEC-1-002 (CA-1-07).
   - [ ] Aprovar, ajustar e versionar o perfil ideal @"José Linhares" !23/11/2026 #projeto
     > O perfil fica "sugerido" até o José aprovar; ajuste vira versão nova; só o aprovado vale na triagem. Prova: TDD 4 e 5 da SPEC-1-002 (CA-1-08, CA-1-09).
-- [ ] Trazer as contas e dar nota de prioridade com o motivo @"José Linhares" !27/11/2026 #projeto
-  > Contas por planilha e pela lista aberta, completadas pelo CNPJ; nota com motivo, fora do perfil e pendente de dados separados. Ref.: SPEC-1-003.
+- [ ] Buscar contas sozinho pelas APIs e dar nota com o motivo @"José Linhares" !26/11/2026 #projeto
+  > Com o perfil aprovado, o sistema puxa contas da Anvisa, do CNPJ e da Apollo toda semana e dá nota com motivo. Ref.: SPEC-1-003 (CA-1-10 a CA-1-15).
+  - [ ] Guardar a chave da Apollo no cofre do Skip @"José Linhares" !20/11/2026 #projeto
+    > Insumo do José (CL-010): criar a conta gratuita na Apollo e colar a chave como APOLLO_API_KEY direto no cofre do Skip, nunca no chat.
   - [ ] Enviar ao Maestro a primeira lista de contas do cliente teste @"José Linhares" !20/11/2026 #projeto
-    > Insumo do José (CL-004): planilha com as empresas-alvo (nome e CNPJ quando tiver). Sem lista, o Maestro usa a lista aberta da Anvisa (D-09).
-  - [ ] Importar contas por planilha sem duplicar @"José Linhares" !24/11/2026 #projeto
-    > Lê CSV ou XLSX, casa pelo CNPJ (ou nome e cidade), guarda origem e linha e não duplica. Prova: TDD 1 e 2 da SPEC-1-003 (CA-1-10, CA-1-11).
-  - [ ] Completar porte e atividade pelos dados abertos do CNPJ @"José Linhares" !25/11/2026 #projeto
+    > Insumo opcional do José (CL-004): planilha com empresas que ele já quer na lista. O Maestro não espera: a busca automática segue.
+  - [ ] Buscar contas nas APIs a partir do perfil aprovado @"José Linhares" !23/11/2026 #projeto
+    > Busca disparada pela aprovação, por botão e toda segunda; junta as fontes sem duplicar e registra cada execução. Prova: TDD 1 e 2 da SPEC-1-003.
+  - [ ] Completar porte e atividade pelos dados abertos do CNPJ @"José Linhares" !24/11/2026 #projeto
     > Consulta aberta por CNPJ: porte, capital, CNAE, situação e cidade; falha vira "pendente de dados". Prova: TDD 3 da SPEC-1-003 (CA-1-12, CA-1-15).
-  - [ ] Calcular a nota de prioridade com o motivo de cada ponto @"José Linhares" !27/11/2026 #projeto
-    > Regras do perfil aprovado viram pontos; a conta mostra nota, faixa e motivo; fora do perfil fica com motivo. Prova: TDD 4 da SPEC-1-003 (CA-1-13, CA-1-14).
-- [ ] Mostrar as contas no funil visual do CRM @"José Linhares" !01/12/2026 #projeto
-  > Funil por cliente com etapa, nota, origem, histórico e motivo. No fim, o único teste da fase com o José e o questionário de produto. Ref.: SPEC-1-004.
-  - [ ] Montar o funil com as etapas e a ficha da conta @"José Linhares" !28/11/2026 #projeto
-    > Colunas por etapa, cartão com nota e origem, ficha com dados, motivo da nota e histórico. Prova: TDD 1 e 2 da SPEC-1-004 (CA-1-16, CA-1-17).
-  - [ ] Mover contas entre etapas e anotar à mão com histórico @"José Linhares" !30/11/2026 #projeto
-    > O José arrasta a conta, dá o motivo ao descartar e anota contato de outro canal; tudo vai ao histórico. Prova: TDD 3 da SPEC-1-004 (CA-1-18, CA-1-19).
-  - [ ] Filtrar por cliente, faixa de nota, etapa e origem @"José Linhares" !30/11/2026 #projeto
-    > Filtros combinados e contador por etapa; nada de outra carteira aparece. Prova: TDD 4 da SPEC-1-004 (CA-1-20).
-  - [ ] Testar o funil e responder o questionário de produto @"José Linhares" !01/12/2026 #projeto
-    > Sessão única da fase, de até 15 minutos: o José faz o roteiro de teste da SPEC-1-004 e responde ao questionário de produto.
-- [ ] Validar a fase 1 com o José @"Rodrigo Santos" !02/12/2026 #projeto
-  > Call de validação: 20 critérios com prova em 05_entregas, sessão do fim da SPEC-1-004 feita e aceite do consultor. Ref.: SPEC-1-004.
+  - [ ] Calcular a nota sozinho a cada conta nova, com o motivo @"José Linhares" !26/11/2026 #projeto
+    > Regras do perfil viram pontos; a conta mostra nota, faixa e motivo; fora do perfil fica com motivo. Prova: TDD 4 e 5 da SPEC-1-003 (CA-1-13, CA-1-14).
+- [ ] Pesquisar sozinho cada conta priorizada e escrever o briefing @"José Linhares" !30/11/2026 #projeto
+  > Conta em Prioridade é pesquisada sozinha: maturidade digital do site, decisores e briefing de abertura pela IA. Ref.: SPEC-1-004 (CA-1-16 a CA-1-20).
+  - [ ] Ler o site e marcar a maturidade digital com evidência @"José Linhares" !27/11/2026 #projeto
+    > CRM, pixel e automação lidos no site com a evidência; sem evidência fica "não lido". Prova: TDD 1 e 2 da SPEC-1-004 (CA-1-16, CA-1-17).
+  - [ ] Trazer os decisores da conta pela busca de pessoas @"José Linhares" !27/11/2026 #projeto
+    > Até 5 decisores com nome, cargo e fonte pela Apollo, sem e-mail e sem telefone. Prova: TDD 2 da SPEC-1-004 (CA-1-18).
+  - [ ] Escrever o briefing de abertura com IA e as fontes @"José Linhares" !28/11/2026 #projeto
+    > Dor provável, gatilho e abordagem com as fontes; dor sem fonte fica "a confirmar". Prova: TDD 3 da SPEC-1-004 (CA-1-19).
+  - [ ] Encadear a pesquisa com fila, limite diário e nova tentativa @"José Linhares" !30/11/2026 #projeto
+    > Fila com limite de 25 por dia, nova tentativa automática e correção do José mantida. Prova: TDD 4 e 5 da SPEC-1-004 (CA-1-20).
+- [ ] Mostrar as contas no funil visual do CRM @"José Linhares" !02/12/2026 #projeto
+  > Funil por cliente com etapa, nota, briefing, histórico e motivo. No fim, o único teste da fase com o José e o questionário de produto. Ref.: SPEC-1-005.
+  - [ ] Montar o funil com as etapas e a ficha da conta @"José Linhares" !01/12/2026 #projeto
+    > Colunas por etapa, cartão com nota e origem, ficha com dados, motivo, briefing e histórico. Prova: TDD 1 e 2 da SPEC-1-005 (CA-1-21, CA-1-22).
+  - [ ] Mover contas entre etapas e anotar à mão com histórico @"José Linhares" !01/12/2026 #projeto
+    > O José arrasta a conta, dá o motivo ao descartar e anota contato de outro canal; tudo vai ao histórico. Prova: TDD 3 da SPEC-1-005 (CA-1-23, CA-1-24).
+  - [ ] Filtrar por cliente, faixa de nota, etapa e origem @"José Linhares" !01/12/2026 #projeto
+    > Filtros combinados e contador por etapa; nada de outra carteira aparece. Prova: TDD 4 da SPEC-1-005 (CA-1-25).
+  - [ ] Testar o funil e responder o questionário de produto @"José Linhares" !02/12/2026 #projeto
+    > Sessão única da fase, de até 15 minutos: o José faz o roteiro de teste da SPEC-1-005 e responde ao questionário de produto.
+- [ ] Validar a fase 1 com o José @"Rodrigo Santos" !03/12/2026 #projeto
+  > Call de validação: 25 critérios com prova em 05_entregas, sessão do fim da SPEC-1-005 feita e aceite do consultor. Ref.: SPEC-1-005.
