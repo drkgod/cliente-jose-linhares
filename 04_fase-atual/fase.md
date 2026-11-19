@@ -55,7 +55,7 @@ tarefas que já têm um.
     > O perfil fica "sugerido" até o José aprovar; ajuste vira versão nova; só o aprovado vale na triagem. Prova: TDD 4 e 5 da SPEC-1-002 (CA-1-08, CA-1-09).
 - [x] Buscar contas sozinho pelas APIs e dar nota com o motivo @"José Linhares" !26/11/2026 #projeto
   > Com o perfil aprovado, o sistema puxa contas da Anvisa, do CNPJ e da Apollo toda semana e dá nota com motivo. Ref.: SPEC-1-003 (CA-1-10 a CA-1-15).
-  - [ ] Guardar a chave da Apollo no cofre do Skip @"José Linhares" !20/11/2026 #projeto
+  - [x] Guardar a chave da Apollo no cofre do Skip @"José Linhares" !20/11/2026 #projeto
     > Insumo do José (CL-010): criar a conta gratuita na Apollo e colar a chave como APOLLO_API_KEY direto no cofre do Skip, nunca no chat.
   - [ ] Enviar ao Maestro a primeira lista de contas do cliente teste @"José Linhares" !20/11/2026 #projeto
     > Insumo opcional do José (CL-004): planilha com empresas que ele já quer na lista. O Maestro não espera: a busca automática segue.

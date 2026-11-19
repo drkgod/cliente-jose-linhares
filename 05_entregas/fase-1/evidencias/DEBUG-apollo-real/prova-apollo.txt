@@ -1,0 +1,45 @@
+PROVA REAL APOLLO API — 19/11/2026 2026-11-19T11:42:09.998340Z
+Chave usada: APOLLO_API_KEY do cofre (plano pago). Valor nunca registrado.
+
+=== 1) Antes da correcao: endpoints que o codigo chamava ===
+POST mixed_people/search -> API_INACCESSIBLE | This API key is not authorized to access api/v1/mixed_people/search. Request an API key from your administrato
+POST api/v1/mixed_companies/search -> API_INACCESSIBLE | This API key is not authorized to access api/v1/mixed_companies/search. Request an API key from your administr
+
+=== 2) Depois da correcao: busca de empresas (organizations/search) ===
+perfil tipo=Indústrias de cosméticos e higiene pessoal | porte=Médio e grande porte
+  consulta enviada: {"page": 1, "per_page": 3, "organization_locations": ["Brazil"], "q_organization_keyword_tags": ["cosmeticos", "higiene pessoal"], "organization_num_employees_ranges": ["11,50", "51,200", "201,500", "501,1000", "1001,5000"]}
+  total encontrado: 1354
+   - Tapajós Distribuidora | None | func: 270
+   - ALS Beauty | None | func: 160
+   - ALS - Beauty & personal care | None | func: 200
+perfil tipo=Indústria de cosméticos | porte=Pequeno e médio porte
+  consulta enviada: {"page": 1, "per_page": 3, "organization_locations": ["Brazil"], "q_organization_keyword_tags": ["cosmeticos"], "organization_num_employees_ranges": ["1,10", "11,50", "51,200", "201,500"]}
+  total encontrado: 2686
+   - KEUNE Haircosmetics Brasil | None | func: 320
+   - Skelt Beauty Brands | None | func: 380
+   - Mahogany Cosméticos | mahogany.com.br | func: 350
+
+=== 3) Depois da correcao: decisores (mixed_people/api_search) ===
+conta dominio=natura.com.br | total=951 | amostra 25
+  ordem aplicada (C-level/dono -> diretor -> head -> gerente); 5 primeiros da colecao decisores:
+   1. Francisco De***a | CEO Natura Avon Mexico | fonte apollo
+   2. Joao Fe***a | CEO | fonte apollo
+   3. Alberto Co***o | Diretor de Estratégia, Transformação e Governança | fonte apollo
+   4. Andre Be***i | Diretor de Vendas Regional | fonte apollo
+   5. Denise Le***l | Manufacturing, Engineering and QSE Executive Director | fonte apollo
+
+=== 4) Dominio com lixo (protocolo/www/caminho) e limpo pelo hook antes da chamada ===
+bruto=https://www.natura.com.br/ -> limpo=natura.com.br -> total=562
+   - Joao Fe***a | CEO
+   - Renata Me***r | Directora de Recursos Humanos Natura
+
+=== 5) Endpoints que a chave NAO tem (nao usados pelo sistema) ===
+POST people/match -> API_INACCESSIBLE
+POST people/bulk_match -> API_INACCESSIBLE
+POST mixed_companies/search -> API_INACCESSIBLE
+
+=== 6) Observacao sobre a chave ===
+A chave criada pelo Jose no painel da Apollo libera apenas mixed_people/api_search e
+organizations/search (os dois que o CRM usa). people/match, people/bulk_match e
+mixed_companies/search respondem 403 API_INACCESSIBLE porque nao foram marcados na chave.
+O CRM nao usa nenhum desses tres nesta fase; e-mail e telefone ficam para a fase 2.

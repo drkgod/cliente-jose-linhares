@@ -11,16 +11,16 @@
 - aguardando_teste: funil-visual — sessão da fase 1 (roteiro + questionário de produto)
 - em_espera: nenhuma
 - teste_humano: pendente:sessão da SPEC-1-005 com o José (até 15 min)
-- verificacao_automatica: passou — QA do Skip verde, versão 0.0.20 (17760be) publicada
+- verificacao_automatica: passou — QA do Skip verde, versão 0.0.21 (b97697c) publicada após o debug da Apollo
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: 17760be
-- skip_publicacao: publicada:17760be em 2026-11-16T23:40:52.452Z
+- skip_versao: b97697c
+- skip_publicacao: publicada:b97697c em 2026-11-19T11:41:31.676Z
 - pendente_github: nao
-- ultima_acao: SPEC-1-005 entregue, publicada e provada — CA-1-21 a CA-1-25
+- ultima_acao: debug da Apollo com a chave real — endpoints e filtros corrigidos e provados por chamada real (Contas e decisores)
 - proxima_acao: fazer a sessão de teste da fase 1 com o José e registrar as respostas
-- atualizado_em: 2026-11-16T20:42:00-03:00
+- atualizado_em: 2026-11-19T08:45:00-03:00
 
 ## Construção da fase 1 — concluída
 
@@ -44,6 +44,8 @@ mapeou as contas que já existiam.
 - **CL-003 — dados do cliente teste** (José informa amanhã): com eles o cadastro real é criado e
   a busca, a pesquisa e o funil passam a rodar sobre dados verdadeiros, o que também alimenta a
   sessão de teste.
-- **CL-004** (lista de contas, opcional) e **CL-010** (chave da Apollo): sem a chave, empresas e
-  decisores vêm do simulador.
+- **CL-004** (lista de contas, opcional).
+- **CL-010 — atendido** em 19/11/2026: `APOLLO_API_KEY` no cofre de preview e produção; a busca de
+  empresas e a de decisores passaram a usar a Apollo real (prova em
+  `05_entregas/fase-1/evidencias/DEBUG-apollo-real/`).
 - **Sessão de teste da fase 1**: roteiro da SPEC-1-005 + questionário de produto.
