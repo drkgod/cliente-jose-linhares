@@ -6,7 +6,7 @@
 - owner_informativo: José Linhares
 - spec: 04_fase-atual/specs/spec-1-005-funil-visual.md
 - analise: .adapta-cliente/analises/task-funil.md
-- etapa: aguardando_resposta
+- etapa: aguardando_teste_humano
 - autorizacao_implementacao: confirmada pelo pedido "pode seguir para a SPEC-1-005" em 16/11/2026 20:33
 - aguardando_teste: funil-visual — sessão da fase 1 (roteiro + questionário de produto)
 - em_espera: nenhuma
@@ -15,12 +15,12 @@
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: cfd739d
-- skip_publicacao: publicada:cfd739d em 2026-11-25T17:38:12.766Z
+- skip_versao: a63e651
+- skip_publicacao: publicada:a63e651 em 2026-11-25T18:34:15.372Z
 - pendente_github: nao
-- ultima_acao: investigacao do CNPJ + correcao do hook de triagem; bloqueio na pontuacao por criterio em texto livre
-- proxima_acao: Jose decide como os criterios de prioridade viram regra verificavel para a nota funcionar
-- atualizado_em: 2026-11-25T14:40:00-03:00
+- ultima_acao: opcao A entregue — CNPJ da Receita na busca (5 contas novas com CNPJ) + regras verificaveis (Apsen/Blau/Prati de 0 para 70 faixa A)
+- proxima_acao: completar o CNPJ das 22 contas da Apollo e rodar o roteiro do funil com o Jose
+- atualizado_em: 2026-11-25T15:35:00-03:00
 
 ## Construção da fase 1 — concluída
 

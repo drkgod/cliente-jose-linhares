@@ -381,8 +381,71 @@ routerAdd('POST', '/backend/v1/contas/buscar', (e) => {
     inicio: inicioAnvisa,
   })
 
+  // ---------- Fonte 3: base da Receita via apipj (traz o CNPJ de verdade) ----------
+  // A Apollo nunca devolve CNPJ; a Receita lista CNPJs ativos por CNAE. É esta fonte que
+  // faz a conta nascer completa em vez de cair em "pendente de dados".
+  const inicioApipj = new Date().toISOString()
+  const candApipj = []
+  let falhasApipj = 0
+  let erroApipj = ''
+  let cotaApipj = 0
+  const chaveApipj = $secrets.get('APIPJ_API_KEY') || ''
+  if (!chaveApipj) {
+    erroApipj = 'sem chave no cofre'
+  } else {
+    // CNAEs de busca ficam no perfil (fontes.cnaes_busca); sem eles, usa o segmento farmacêutico.
+    let cnaes = ['2121101', '2122000', '4644301']
+    try {
+      const meta = JSON.parse(perfil.getString('fontes') || '{}')
+      if (meta && meta.cnaes_busca && meta.cnaes_busca.length > 0) cnaes = meta.cnaes_busca
+    } catch (_) {}
+    for (let c = 0; c < cnaes.length; c++) {
+      try {
+        const res = $http.send({
+          url:
+            'https://apipj.com.br/v1/busca?cnae=' +
+            encodeURIComponent(String(cnaes[c])) +
+            '&limite=3&formato=simplificado',
+          method: 'GET',
+          headers: { Authorization: 'Bearer ' + chaveApipj },
+          timeout: 45,
+        })
+        if (res.statusCode >= 400) {
+          falhasApipj = falhasApipj + 1
+          erroApipj = 'fonte respondeu ' + res.statusCode
+          continue
+        }
+        const dados = res.json || {}
+        const lista = dados.resultados || []
+        cotaApipj = cotaApipj + lista.length
+        for (let i = 0; i < lista.length; i++) {
+          const item = lista[i] || {}
+          const digitos = String(item.cnpj || '').replace(/[^0-9]/g, '')
+          if (digitos.length !== 14) continue
+          candApipj.push({
+            empresa: String(item.nome || ''),
+            dominio: '',
+            cnpj: digitos,
+            fontes: ['receita'],
+          })
+        }
+      } catch (_err) {
+        falhasApipj = falhasApipj + 1
+        erroApipj = 'fonte fora do ar'
+      }
+    }
+  }
+  resumos.push({
+    fonte: 'receita',
+    encontradas: candApipj.length,
+    falhas: falhasApipj,
+    cota: cotaApipj,
+    erro: erroApipj,
+    inicio: inicioApipj,
+  })
+
   // ---------- Juntar sem duplicar e gravar ----------
-  const candidatos = candApollo.concat(candAnvisa)
+  const candidatos = candApollo.concat(candAnvisa).concat(candApipj)
   const porChave = {}
   for (let i = 0; i < candidatos.length; i++) {
     const c = candidatos[i]

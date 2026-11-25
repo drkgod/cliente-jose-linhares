@@ -1,0 +1,45 @@
+PROVA — CNPJ da Receita + nota por regra verificavel
+Data: 2026-11-25T18:34:23.935726+00:00 | skip a63e651 (0.0.25) | producao
+
+== Fonte nova: base da Receita via apipj ==
+Chave no cofre do preview (APIPJ_API_KEY). Plano gratuito: 10 consultas/min, 50.000/mes.
+GET /v1/busca?cnae=<7 digitos>&limite=3&formato=simplificado
+CNAEs do perfil (fontes.cnaes_busca): 2121101, 2122000, 4644301
+
+== Execucao real da busca (25/11/2026) ==
+POST /backend/v1/contas/buscar {cliente: 76wdli28z7pdw7c, gatilho: botao}
+  apollo  -> 25 encontradas, 0 falhas
+  anvisa  -> 0 encontradas, 404 (fonte continua fora do ar, sera removida)
+  receita -> 5 encontradas, 1 falha 429 (limite por minuto do plano gratuito)
+  resultado: 5 contas novas, todas JA COM CNPJ (antes: 25 contas sem nenhum CNPJ)
+
+== Contas que nasceram completas e pontuaram ==
+   70 A  BRAINFARMA INDUSTRIA QUIMICA E FARMACEUTICA      (segmento + receita)
+   40 B  IFARMA INDUSTRIA FARMACEUTICA MARANHENSE         (segmento)
+   40 B  AMAZON MEDICINAL INDUSTRIA E COMERCIO            (segmento)
+   40 B  HSTA SAUDE ANIMAL                                (segmento)
+   40 B  AGROBRASIL                                       (segmento)
+
+== Contas antigas que estavam com nota 0 foram reprocessadas ==
+  Apsen Farmaceutica      0/'fora do perfil'  ->  70 A 'prioridade'
+  Blau Farmaceutica       0/'fora do perfil'  ->  70 A 'prioridade'
+  Prati-Donaduzzi         0/'fora do perfil'  ->  70 A 'prioridade'
+  Motivos registrados na conta:
+    Segmento farmaceutico, biotech ou distribuidora ...... 40 pontos (CNAE)
+    Receita anual acima de R$ 50 milhoes ................. 30 pontos (capital social)
+
+== Regras verificaveis gravadas no perfil (migracao 0019) ==
+  Regra A — Segmento (40 pts): CNAE comeca com 2121, 2122, 2110, 2063, 4644 ou 7210
+  Regra B — Porte economico (30 pts): capital social >= R$ 5 milhoes
+    (a Receita nao publica receita anual; capital social e o proxy que existe)
+  Manual (nao pontua sozinho, fica para o Jose):
+    - equipe de vendas externa com 5+ representantes
+    - sinal concreto de investimento em tecnologia
+    - acesso ao decisor certo (VP/Diretor de Vendas)
+  Exclusoes: as tres tambem manuais — dependem de dado que a Receita nao publica.
+
+== Antes x depois ==
+  ANTES: 25 contas, 0 com CNPJ, 0 pontuadas, todas em 'pendente de dados'.
+  DEPOIS: 30 contas, 8 com CNPJ, 7 pontuadas e em Prioridade (4 em faixa A).
+  Pendente: as 22 contas da Apollo continuam sem CNPJ (a Apollo nao devolve) e
+  precisam do CNPJ para completar; a fonte da Receita so cobre os CNAEs buscados.

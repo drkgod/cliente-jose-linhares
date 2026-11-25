@@ -93,6 +93,60 @@ onRecordAfterCreateSuccess((e) => {
     .join(' ')
     .toLowerCase()
 
+  // Regra verificável do perfil (opção A): mede só o que o cadastro da Receita prova.
+  // Formatos aceitos em prioridade[i].regra:
+  //   {campo:'cnae', prefixos:['2121'], pontos:35}
+  //   {campo:'capital_social', min:10000000, pontos:30}
+  //   {campo:'uf', valores:['SP','RJ'], pontos:20}
+  //   {campo:'anos_atividade', min:3, max:null, pontos:15}
+  //   {campo:'porte', valores:['DEMAIS'], pontos:10}
+  const avaliarRegraPerfil = function (regra, reg) {
+    const campo = String((regra && regra.campo) || '')
+    if (campo === 'cnae') {
+      const bruto = String(reg.getString('cnae') || '')
+      const achado = bruto.match(/\((\d{7})\)/)
+      const codigo = achado ? achado[1] : bruto.replace(/[^0-9]/g, '')
+      if (codigo.length < 4) return false
+      const prefixos = regra.prefixos || []
+      for (let i = 0; i < prefixos.length; i++) {
+        if (codigo.indexOf(String(prefixos[i])) === 0) return true
+      }
+      return false
+    }
+    if (campo === 'capital_social') {
+      const valor = Number(reg.get('capital_social') || 0)
+      if (regra.min != null && valor < Number(regra.min)) return false
+      if (regra.max != null && valor > Number(regra.max)) return false
+      return true
+    }
+    if (campo === 'uf') {
+      const uf = String(reg.getString('uf') || '').toUpperCase()
+      const valores = regra.valores || []
+      for (let i = 0; i < valores.length; i++) {
+        if (uf === String(valores[i]).toUpperCase()) return true
+      }
+      return false
+    }
+    if (campo === 'anos_atividade') {
+      const bruto = String(reg.getString('abertura') || '')
+      const achado = bruto.match(/(\d{4})/)
+      if (!achado) return false
+      const anos = new Date().getFullYear() - Number(achado[1])
+      if (regra.min != null && anos < Number(regra.min)) return false
+      if (regra.max != null && anos > Number(regra.max)) return false
+      return true
+    }
+    if (campo === 'porte') {
+      const porte = String(reg.getString('porte') || '').toUpperCase()
+      const valores = regra.valores || []
+      for (let i = 0; i < valores.length; i++) {
+        if (porte.indexOf(String(valores[i]).toUpperCase()) >= 0) return true
+      }
+      return false
+    }
+    return false
+  }
+
   const motivos = []
   let triagem = 'prioridade'
   let nota = 0
@@ -114,6 +168,16 @@ onRecordAfterCreateSuccess((e) => {
         .toLowerCase()
         .trim()
       if (!valor) continue
+      // Exclusão marcada `manual` só o José aplica: nenhum dado do cadastro a comprova.
+      // Antes ela entrava na comparação de texto e nunca casava — agora fica explícita.
+      if (item.manual === true) continue
+      if (item.regra) {
+        if (avaliarRegraPerfil(item.regra, alvo)) {
+          excluida = item.valor
+          break
+        }
+        continue
+      }
       const palavras = valor.split(/\s+/)
       let casou = palavras.length > 0
       for (let p = 0; p < palavras.length; p++) {
@@ -131,12 +195,21 @@ onRecordAfterCreateSuccess((e) => {
       triagem = 'fora_do_perfil'
       motivos.push({ regra: 'Exclusão do perfil: ' + excluida, pontos: 0 })
     } else if (prioridade.length > 0) {
-      // RN-12 — cada critério de prioridade que casa vale uma fatia igual de 100.
+      // RN-12 — cada critério que casa soma os pontos da regra (ou uma fatia igual de 100).
+      // Critério com `regra` é verificável no cadastro; sem regra, cai na comparação de texto.
       const fatia = Math.floor(100 / prioridade.length)
       for (let i = 0; i < prioridade.length; i++) {
         const item = prioridade[i] || {}
         const valor = String(item.valor || '').trim()
         if (!valor) continue
+        if (item.regra) {
+          if (avaliarRegraPerfil(item.regra, alvo)) {
+            const pontos = Number(item.regra.pontos) || fatia
+            motivos.push({ regra: valor, pontos: pontos })
+            nota += pontos
+          }
+          continue
+        }
         const palavras = valor.toLowerCase().split(/\s+/)
         let casou = palavras.length > 0
         for (let p = 0; p < palavras.length; p++) {
@@ -260,6 +333,54 @@ onRecordAfterUpdateSuccess((e) => {
     .join(' ')
     .toLowerCase()
 
+  // Regra verificável do perfil (opção A): mede só o que o cadastro da Receita prova.
+  const avaliarRegraPerfil = function (regra, reg) {
+    const campo = String((regra && regra.campo) || '')
+    if (campo === 'cnae') {
+      const bruto = String(reg.getString('cnae') || '')
+      const achado = bruto.match(/\((\d{7})\)/)
+      const codigo = achado ? achado[1] : bruto.replace(/[^0-9]/g, '')
+      if (codigo.length < 4) return false
+      const prefixos = regra.prefixos || []
+      for (let i = 0; i < prefixos.length; i++) {
+        if (codigo.indexOf(String(prefixos[i])) === 0) return true
+      }
+      return false
+    }
+    if (campo === 'capital_social') {
+      const valor = Number(reg.get('capital_social') || 0)
+      if (regra.min != null && valor < Number(regra.min)) return false
+      if (regra.max != null && valor > Number(regra.max)) return false
+      return true
+    }
+    if (campo === 'uf') {
+      const uf = String(reg.getString('uf') || '').toUpperCase()
+      const valores = regra.valores || []
+      for (let i = 0; i < valores.length; i++) {
+        if (uf === String(valores[i]).toUpperCase()) return true
+      }
+      return false
+    }
+    if (campo === 'anos_atividade') {
+      const bruto = String(reg.getString('abertura') || '')
+      const achado = bruto.match(/(\d{4})/)
+      if (!achado) return false
+      const anos = new Date().getFullYear() - Number(achado[1])
+      if (regra.min != null && anos < Number(regra.min)) return false
+      if (regra.max != null && anos > Number(regra.max)) return false
+      return true
+    }
+    if (campo === 'porte') {
+      const porte = String(reg.getString('porte') || '').toUpperCase()
+      const valores = regra.valores || []
+      for (let i = 0; i < valores.length; i++) {
+        if (porte.indexOf(String(valores[i]).toUpperCase()) >= 0) return true
+      }
+      return false
+    }
+    return false
+  }
+
   const motivos = []
   let triagem = 'prioridade'
   let nota = 0
@@ -278,6 +399,14 @@ onRecordAfterUpdateSuccess((e) => {
         .toLowerCase()
         .trim()
       if (!valor) continue
+      if (item.manual === true) continue
+      if (item.regra) {
+        if (avaliarRegraPerfil(item.regra, conta)) {
+          excluida = item.valor
+          break
+        }
+        continue
+      }
       const palavras = valor.split(/\s+/)
       let casou = palavras.length > 0
       for (let p = 0; p < palavras.length; p++) {
@@ -300,6 +429,14 @@ onRecordAfterUpdateSuccess((e) => {
         const item = prioridade[i] || {}
         const valor = String(item.valor || '').trim()
         if (!valor) continue
+        if (item.regra) {
+          if (avaliarRegraPerfil(item.regra, conta)) {
+            const pontos = Number(item.regra.pontos) || fatia
+            motivos.push({ regra: valor, pontos: pontos })
+            nota += pontos
+          }
+          continue
+        }
         const palavras = valor.toLowerCase().split(/\s+/)
         let casou = palavras.length > 0
         for (let p = 0; p < palavras.length; p++) {
