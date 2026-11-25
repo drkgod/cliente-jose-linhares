@@ -1,0 +1,8 @@
+## Debug Summary
+**Task e problema:** contas vindas da Apollo ficam em `pendente_dados` sem nota. Buscando solução, apareceu um segundo bloqueio mais grave na pontuação.
+**Reprodução:** gravar o CNPJ da Apsen (62.462.015/0001-29) numa conta existente e conferir a triagem.
+**Causa raiz (duas):**
+1. A consulta ao CNPJ só existia no hook de **criação** (`onRecordAfterCreateSuccess`). Conta que ganha CNPJ depois — do jeito que o José vai mandar a lista, aos poucos — nunca completava e nunca saía de `pendente_dados`.
+2. O casamento de critério exige **todas** as palavras da frase do critério, com mais de 3 letras, dentro de `empresa + cnae + porte + municipio + uf`. Critério escrito como frase nunca casa: "Segmento farmacêutico ou biotech" exige as 3 palavras; "Acesso ao decisor de vendas (VP ou Diretor Comercial)" exige 5, inclusive `acesso` e `decisor`, que não existem em cadastro de empresa. Resultado: nota 0 e `fora_do_perfil` mesmo para a Apsen, que é exatamente o alvo.
+**Correção:** (1) o hook de atualização passou a consultar a BrasilAPI e completar o registro antes de triar — versão `cfd739d`, provado: Apsen, Blau e Prati-Donaduzzi completaram porte "DEMAIS", CNAE, cidade e `consultado_em`. (2) **pendente**: a pontuação por frase livre precisa de decisão do José (virar regra verificável).
+**Situação:** impedimento — a nota não funciona com critérios em texto livre. Depende de decisão do cliente.

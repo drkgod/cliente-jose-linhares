@@ -1,0 +1,52 @@
+INVESTIGACAO — falta de CNPJ nas contas da Apollo
+Data: 2026-11-25T17:39:09.174564+00:00
+
+=== O que foi testado (25/11/2026) ===
+1) Varredura de CNPJ no HTML dos 25 sites das contas da Apollo
+   -> 6 de 25 acharam alguma sequencia, COM FALSOS POSITIVOS.
+   -> Caso grave: Laboratorio Teuto (teuto.com.br) devolveu 61575191247265,
+      que na BrasilAPI e LISBOA MARCIAO MEDICOS LTDA (Belem/PA) - outra empresa.
+   -> Conclusao: raspar CNPJ de site nao serve sem validar a razao social.
+
+2) Base aberta da Receita Federal
+   -> arquivos.receitafederal.gov.br: TLS 'Connection reset by peer' a partir do pod.
+   -> Inacessivel daqui.
+
+3) APIs publicas de CNPJ (todas exigem o numero; nenhuma busca por razao social gratuita)
+   BrasilAPI: OK por CNPJ | ReceitaWS: 3/min | CNPJ.ws: 3/min | Minha Receita: OK por CNPJ
+   cnpja open (/office): OK por CNPJ, 5/min | busca por nome: plano Ouro+ (pago)
+   OpenCNPJ (kitana): 502 | OpenCNPJ (api.opencnpj.com.br): 404
+
+4) SOLUCAO ENCONTRADA: apipj.com.br
+   - API sobre a base de dados abertos da Receita Federal, atualizada em lote mensal.
+   - Plano GRATUITO sem cartao: 10 consultas/min e 50.000/mes.
+   - GET /v1/cnpj/{cnpj}  -> documento cadastral completo
+   - GET /v1/busca?cnae=<7 digitos>&municipio=<codigo>
+     -> lista CNPJs ATIVOS por atividade economica, paginado por cursor.
+     -> e exatamente o que resolve: da o CNPJ de fabricantes/distribuidoras
+        farmaceuticas sem depender da lista manual do Jose.
+   - Exige chave gratuita (apipj_live_...). Sem chave, IP de datacenter recebe 401.
+   - Docs: https://apipj.com.br/docs.md
+
+=== CNAEs que interessam ao perfil da Magically ===
+   2121101  Fabricacao de medicamentos alopaticos para uso humano
+   2122000  Fabricacao de medicamentos para uso veterinario
+   4644301  Comercio atacadista de medicamentos e drogas de uso humano
+   4644302  Comercio atacadista de medicamentos e drogas de uso veterinario
+   2063100  Fabricacao de cosmeticos, produtos de perfumaria e higiene pessoal
+
+=== CNPJs confirmados na BrasilAPI (usados na prova) ===
+   62462015000129  APSEN FARMACEUTICA S/A
+   58430828000160  BLAU FARMACEUTICA S.A.
+   73856593000166  PRATI, DONADUZZI & CIA LTDA
+
+=== BLOQUEIO ENCONTRADO DEPOIS: a triagem nao pontua nem com CNPJ ===
+Com CNPJ, a conta completa (porte DEMAIS, CNAE, cidade, situacao ATIVA) mas a nota
+continua 0 e ela vai para 'fora do perfil'. Causa: o hook exige TODAS as palavras do
+criterio (com mais de 3 letras) dentro do texto da conta. Criterios escritos como frase
+nunca casam. Ex.: 'Segmento farmaceutico ou biotech' exige as 3 palavras; 'Acesso ao
+decisor de vendas (VP ou Diretor Comercial)' exige 5, incluindo 'acesso' e 'decisor',
+que nao existem em nenhum cadastro de empresa.
+Corrigido no mesmo dia: o CNPJ que chega depois agora completa a conta (cfd739d).
+A pontuacao precisa de uma decisao do Jose: os criterios precisam virar regras
+verificaveis (faixa de funcionarios, faixa de receita, CNAE), nao frases livres.

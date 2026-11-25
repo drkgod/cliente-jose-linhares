@@ -6,7 +6,7 @@
 - owner_informativo: José Linhares
 - spec: 04_fase-atual/specs/spec-1-005-funil-visual.md
 - analise: .adapta-cliente/analises/task-funil.md
-- etapa: aguardando_teste_humano
+- etapa: aguardando_resposta
 - autorizacao_implementacao: confirmada pelo pedido "pode seguir para a SPEC-1-005" em 16/11/2026 20:33
 - aguardando_teste: funil-visual — sessão da fase 1 (roteiro + questionário de produto)
 - em_espera: nenhuma
@@ -15,12 +15,12 @@
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: a11ddeb
-- skip_publicacao: publicada:a11ddeb em 2026-11-25T16:02:11.492Z
+- skip_versao: cfd739d
+- skip_publicacao: publicada:cfd739d em 2026-11-25T17:38:12.766Z
 - pendente_github: nao
-- ultima_acao: CL-003 cadastrado (Magically Brasil) + perfil aprovado + busca real rodando (25 contas da Apollo)
-- proxima_acao: esperar a lista de CNPJs (CL-004) para as contas saírem de pendente_dados e entrarem em Prioridade
-- atualizado_em: 2026-11-25T13:05:00-03:00
+- ultima_acao: investigacao do CNPJ + correcao do hook de triagem; bloqueio na pontuacao por criterio em texto livre
+- proxima_acao: Jose decide como os criterios de prioridade viram regra verificavel para a nota funcionar
+- atualizado_em: 2026-11-25T14:40:00-03:00
 
 ## Construção da fase 1 — concluída
 
