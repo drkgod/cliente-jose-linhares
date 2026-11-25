@@ -1,0 +1,36 @@
+PROVA — CL-003 + busca real com o cliente teste (Magically Brasil)
+Data: 2026-11-25T16:02:53.124252+00:00
+
+1) CNPJ do cliente (Receita Federal, BrasilAPI)
+   MAGICALLY BRASIL LTDA | 15.459.006/0001-07 | ATIVA | SAO PAULO/SP | abertura 2012-02-23
+   CNAE: Suporte tecnico, manutencao e outros servicos em tecnologia da informacao
+   Porte: EMPRESA DE PEQUENO PORTE
+
+2) Site lido (redireciona para www)
+   https://magically.com.br -> 301 -> https://www.magically.com.br (200, ~24 KB, 4.091 chars legiveis)
+
+3) Perfil ideal sugerido pela IA e aprovado
+   tipo_empresa: Farmaceutica de Medio Porte (fonte: cadastro)
+   porte: R$ 50M a R$ 500M (fonte: cadastro)
+   cargos: Diretor Comercial/VP Vendas, Gerente SFE/Marketing, Diretor TI, Diretor Compliance, CRM Manager/Sales Ops
+   prioridade: 5 itens (equipe 15+ representantes, receita 100M+, segmento farmaceutico/biotech, sinal de tecnologia, acesso ao decisor)
+   exclusoes: 3 itens (menos de 5 representantes, pure inside sales, sem investimento em tecnologia)
+   versao 1, status aprovado
+
+4) Busca automatica disparada pela aprovacao + botao
+   fonte apollo: encontradas 25 | falhas 0 | cota 1 | erro: -
+   fonte anvisa: encontradas 0 | falhas 1 | cota 0 | erro: fonte fora do ar (404)
+   novas: 0 | repetidas: 25 (a aprovacao ja havia rodado)
+
+5) Contas gravadas (25) — todas farmaceuticas reais do porte do perfil
+   Apsen Farmaceutica, Laboratorio Teuto, Blau Farmaceutica, MedQuimica, Prati-Donaduzzi,
+   Germed Pharma, Aspen Pharma Brasil, Cellera Farma, Farmax, Geolab, Kley Hertz, Medley,
+   Momenta, Supera Farma, Torrent do Brasil, Blanver, Althaia, Adium, Ativa Logistica,
+   Grupo Tapajos, Granado/Perfumaria Phebo, Zoetis Brasil, MSD Saude Animal, Ourofino Saude Animal, g1
+
+6) Limitacao conhecida (nao e defeito do CRM)
+   Todas as 25 ficaram em 'pendente_dados': a Apollo NAO devolve CNPJ e a Anvisa responde 404.
+   Sem CNPJ a triagem (RN-09) nao pontua, entao nenhuma entra em Prioridade e a pesquisa de
+   decisores nao dispara. Com a planilha de CNPJs isso se resolve.
+   Ruido a filtrar: 'g1' (portal de noticias) veio pela etiqueta 'pharmaceutical'.
+

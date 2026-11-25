@@ -11,16 +11,16 @@
 - aguardando_teste: funil-visual — sessão da fase 1 (roteiro + questionário de produto)
 - em_espera: nenhuma
 - teste_humano: pendente:sessão da SPEC-1-005 com o José (até 15 min)
-- verificacao_automatica: passou — QA do Skip verde, versão 0.0.21 (b97697c) publicada após o debug da Apollo
+- verificacao_automatica: passou — QA do Skip verde, versão 0.0.22 (a11ddeb) publicada após corrigir a busca com o perfil da Magically
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: b97697c
-- skip_publicacao: publicada:b97697c em 2026-11-19T11:41:31.676Z
+- skip_versao: a11ddeb
+- skip_publicacao: publicada:a11ddeb em 2026-11-25T16:02:11.492Z
 - pendente_github: nao
-- ultima_acao: debug da Apollo com a chave real — endpoints e filtros corrigidos e provados por chamada real (Contas e decisores)
-- proxima_acao: fazer a sessão de teste da fase 1 com o José e registrar as respostas
-- atualizado_em: 2026-11-19T08:45:00-03:00
+- ultima_acao: CL-003 cadastrado (Magically Brasil) + perfil aprovado + busca real rodando (25 contas da Apollo)
+- proxima_acao: esperar a lista de CNPJs (CL-004) para as contas saírem de pendente_dados e entrarem em Prioridade
+- atualizado_em: 2026-11-25T13:05:00-03:00
 
 ## Construção da fase 1 — concluída
 
@@ -41,10 +41,8 @@ mapeou as contas que já existiam.
 
 ## Pendências para o cliente
 
-- **CL-003 — dados do cliente teste** (José informa amanhã): com eles o cadastro real é criado e
-  a busca, a pesquisa e o funil passam a rodar sobre dados verdadeiros, o que também alimenta a
-  sessão de teste.
-- **CL-004** (lista de contas, opcional).
+- ~~**CL-003 — dados do cliente teste**~~: atendido em 25/11/2026 — Magically Brasil Ltda cadastrada, perfil aprovado e busca real rodando (prova em `05_entregas/fase-1/evidencias/DEBUG-apollo-real/prova-cl003-busca-real.txt`).
+- **CL-004 — agora bloqueante**: a Apollo não devolve CNPJ e a Anvisa está fora do ar (404), então as 25 contas da busca ficam em `pendente_dados` sem nota. José vai passar os CNPJs aos poucos.
 - **CL-010 — atendido** em 19/11/2026: `APOLLO_API_KEY` no cofre de preview e produção; a busca de
   empresas e a de decisores passaram a usar a Apollo real (prova em
   `05_entregas/fase-1/evidencias/DEBUG-apollo-real/`).

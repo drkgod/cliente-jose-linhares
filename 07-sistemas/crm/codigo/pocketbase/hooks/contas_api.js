@@ -158,25 +158,105 @@ routerAdd('POST', '/backend/v1/contas/buscar', (e) => {
       'nacional',
       'brasil',
     ]
+    // A Apollo indexa o setor da empresa em inglês: "farmaceutica" em português não casa com
+    // nada. Traduzimos o segmento do perfil e, quando o perfil diz receita (R$ 50M a R$ 500M),
+    // usamos revenue_range — que é o dado real de receita, não uma dedução de funcionários.
+    const segmentos = [
+      { padrao: /farmac|farma\b|medicament/, etiqueta: 'pharmaceutical' },
+      { padrao: /biotecnolog|biotech/, etiqueta: 'biotechnology' },
+      { padrao: /veterinar|saude animal|pet\b/, etiqueta: 'veterinary' },
+      { padrao: /cosmetic|perfumaria|beleza|higiene pessoal/, etiqueta: 'cosmetics' },
+      { padrao: /distribuidor.*medicament|distribuidora/, etiqueta: 'wholesale' },
+      { padrao: /laborator/, etiqueta: 'research' },
+      { padrao: /hospital|clinica|saude/, etiqueta: 'hospital & health care' },
+    ]
+    const tipoBaixo = semAcento(tipoEmpresa)
     const etiquetas = []
-    const partes = semAcento(tipoEmpresa).split(/[,;/&]|\bou\b|\be\b/)
-    for (let i = 0; i < partes.length; i++) {
-      const palavras = partes[i].split(/\s+/).filter(function (p) {
-        return p && genericas.indexOf(p) < 0
-      })
-      const frase = palavras.slice(0, 3).join(' ').trim()
-      if (frase.length >= 4 && etiquetas.indexOf(frase) < 0) etiquetas.push(frase)
+    for (let s = 0; s < segmentos.length; s++) {
+      if (segmentos[s].padrao.test(tipoBaixo) && etiquetas.indexOf(segmentos[s].etiqueta) < 0) {
+        etiquetas.push(segmentos[s].etiqueta)
+      }
     }
-    const faixas = []
+    // No máximo duas etiquetas: cada etiqueta a mais amplia o resultado e traz ruído.
+    if (etiquetas.length > 2) etiquetas.length = 2
+    // Segmento não reconhecido: usa as palavras do perfil como etiqueta (melhor que nada).
+    if (etiquetas.length === 0) {
+      const partes = tipoBaixo.split(/[,;/&]|\bou\b|\be\b/)
+      for (let i = 0; i < partes.length; i++) {
+        const palavras = partes[i].split(/\s+/).filter(function (pal) {
+          return pal && genericas.indexOf(pal) < 0
+        })
+        const frase = palavras.slice(0, 2).join(' ').trim()
+        if (frase.length >= 4 && etiquetas.indexOf(frase) < 0) etiquetas.push(frase)
+      }
+    }
+
+    // Receita: "R$ 50M a R$ 500M", "entre R$ 50 e 100 milhões", "acima de R$ 50 milhões".
+    // A unidade vem uma vez por faixa ("100 a 200 milhões"), então tratamos a faixa primeiro.
     const p = semAcento(porte)
-    if (/micro|pequen/.test(p)) faixas.push('1,10')
-    if (/pequen|medi|medio/.test(p)) faixas.push('11,50')
-    if (/medi|medio/.test(p)) faixas.push('51,200')
-    if (/medi|medio|grande/.test(p)) faixas.push('201,500')
-    if (/grande/.test(p)) faixas.push('501,1000', '1001,5000')
+    const multiplicadorDe = function (unidade) {
+      return /^b|bilh/.test(unidade) ? 1000000000 : 1000000
+    }
+    const receitas = []
+    const faixa =
+      /(\d+(?:[.,]\d+)?)\s*(?:a|e|ate|-)\s*(\d+(?:[.,]\d+)?)\s*(milhoes|milhao|m\b|bilhao|bilhoes|bi\b|b\b)/g
+    let achado = faixa.exec(p)
+    while (achado !== null) {
+      const mult = multiplicadorDe(achado[3])
+      receitas.push(parseFloat(String(achado[1]).replace(',', '.')) * mult)
+      receitas.push(parseFloat(String(achado[2]).replace(',', '.')) * mult)
+      achado = faixa.exec(p)
+    }
+    const isolados =
+      p.match(/(\d+(?:[.,]\d+)?)\s*(milhoes|milhao|m\b|bilhao|bilhoes|bi\b|b\b)/g) || []
+    for (let i = 0; i < isolados.length; i++) {
+      const par = isolados[i].match(
+        /(\d+(?:[.,]\d+)?)\s*(milhoes|milhao|m\b|bilhao|bilhoes|bi\b|b\b)/,
+      )
+      if (!par) continue
+      receitas.push(parseFloat(String(par[1]).replace(',', '.')) * multiplicadorDe(par[2]))
+    }
     const consulta = { page: 1, per_page: 25, organization_locations: ['Brazil'] }
     if (etiquetas.length > 0) consulta.q_organization_keyword_tags = etiquetas
-    if (faixas.length > 0) consulta.organization_num_employees_ranges = faixas
+    if (receitas.length > 0) {
+      let menor = receitas[0]
+      let maior = receitas[0]
+      for (let i = 1; i < receitas.length; i++) {
+        if (receitas[i] < menor) menor = receitas[i]
+        if (receitas[i] > maior) maior = receitas[i]
+      }
+      // "R$ 200 milhões ou mais" e "acima de R$ 50 milhões": só o piso, sem teto.
+      if (menor === maior) {
+        consulta.revenue_range = { min: Math.round(menor) }
+      } else {
+        consulta.revenue_range = { min: Math.round(menor), max: Math.round(maior) }
+      }
+      consulta.organization_num_employees_ranges = undefined
+    } else {
+      // Sem receita no perfil: usa a faixa de funcionários. Primeiro tenta o tamanho de equipe
+      // escrito no perfil ("equipe de 15 a 300 pessoas"); senão, o texto do porte.
+      const faixas = []
+      if (/pessoa|representante|funcionari|vendedor|colaborador/.test(p)) {
+        const equipe = /(\d+)\s*(?:a|e|ate|-)\s*(\d+)/.exec(p)
+        if (equipe) {
+          const de = parseInt(equipe[1], 10)
+          const ate = parseInt(equipe[2], 10)
+          if (de <= 10) faixas.push('1,10')
+          if (de <= 50) faixas.push('11,50')
+          if (ate >= 50) faixas.push('51,200')
+          if (ate >= 200) faixas.push('201,500')
+          if (ate >= 1000) faixas.push('501,1000')
+        }
+      }
+      if (faixas.length === 0) {
+        if (/micro|pequen/.test(p)) faixas.push('1,10')
+        if (/pequen|medi|medio/.test(p)) faixas.push('11,50')
+        if (/medi|medio/.test(p)) faixas.push('51,200')
+        if (/medi|medio|grande/.test(p)) faixas.push('201,500')
+        if (/grande/.test(p)) faixas.push('501,1000')
+      }
+      if (faixas.length > 0) consulta.organization_num_employees_ranges = faixas
+    }
     try {
       const res = $http.send({
         url: 'https://api.apollo.io/v1/organizations/search',

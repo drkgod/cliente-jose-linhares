@@ -1,0 +1,12 @@
+## Debug Summary
+**Task e problema:** CL-003 (dados do cliente teste) + prova da busca automática com a Apollo real. O perfil que a IA sugeriu ("Farmacêutica de Médio Porte" / "R$ 50M a R$ 500M") não trazia nenhuma empresa.
+**Reprodução:** após cadastrar a Magically Brasil e aprovar o perfil v1, a busca respondeu 0 contas; chamando a Apollo com os parâmetros gerados pelo hook, `total_entries: 0`.
+**Causa raiz:** dois erros na tradução do perfil para a busca da Apollo.
+1. `q_organization_keyword_tags` recebia a frase em português ("farmaceutica medio porte"). A Apollo indexa setor em **inglês**: "pharmaceutical" casa, "farmaceutica" não.
+2. O porte "R$ 50M a R$ 500M" é **receita**, não número de funcionários. O hook tentava deduzir faixa de funcionários do texto e não achava nada — ou, quando achava, filtrava pela dimensão errada.
+**Correção:**
+- tabela de tradução de segmento PT→inglês (farmacêutica→pharmaceutical, biotech→biotechnology, veterinário/pet→veterinary, cosméticos→cosmetics, distribuidora→wholesale, laboratório→research, hospital/clínica→hospital & health care), no máximo 2 etiquetas por busca para não ampliar demais.
+- receita: `revenue_range` da Apollo, lendo faixa com unidade compartilhada ("100 a 200 milhões"), unidade em M ou B, e "acima de/ou mais" como piso sem teto.
+- sem receita no perfil: usa a faixa de funcionários, primeiro a partir do tamanho de equipe escrito ("equipe de 15 a 300 pessoas"), senão do texto do porte.
+**Verificação automática:** lógica validada em Node com 8 formatos de porte (todos corretos), QA do Skip verde, publicado `a11ddeb` (0.0.22). Prova real: perfil da Magically → **69 farmacêuticas** no Brasil (Apsen, Teuto, Blau, MedQuímica, Prati-Donaduzzi…); busca gravou 25 contas.
+**Situação:** de volta ao ciclo. As 25 contas ficam em `pendente_dados` porque a Apollo não devolve CNPJ e a Anvisa responde 404 — depende de CL-004 (lista de CNPJs).

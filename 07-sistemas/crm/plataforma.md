@@ -6,9 +6,9 @@
 - url_producao: https://projeto-native-60baf.goskip.app
 - url_preview: https://projeto-native-60baf--preview.goskip.app
 - skip_cloud: projeto-native-60baf (banco, login e automações de servidor provisionados)
-- versao_aplicada: b97697c (0.0.21)
-- versao_publicada: b97697c em 2026-11-19T11:41:31.676Z
-- ultima_task: debug da Apollo (chave real, busca de empresas e decisores)
+- versao_aplicada: a11ddeb (0.0.22)
+- versao_publicada: a11ddeb em 2026-11-25T16:02:11.492Z
+- ultima_task: CL-003 (cliente teste Magically Brasil) + corrigir a tradução do perfil para a busca
 - registrado_em: 2026-11-16
 - observacao_de_nome: `STATUS.md` e `04_fase-atual/fase.md` citam o projeto "JLA — CRM de prospecção" no Skip. Em 16/11/2026 o José decidiu construir o sistema no projeto "Projeto Native" (id 78281); este arquivo é a fonte da verdade sobre onde o sistema roda.
 - segredos_usados: `CRM_ADMIN_EMAIL`, `CRM_ADMIN_SENHA` (criação do administrador) e `APOLLO_API_KEY` (busca de empresas e de decisores), nos dois ambientes (preview e produção).
@@ -24,3 +24,4 @@
 | 16/11/2026 | configuração (sem task) | não publicada | nenhum — projeto criado em branco |
 | 16/11/2026 | SPEC-1-001 — acesso restrito | 0a0d0f5 | migrations 0001–0008, hooks `acesso_guard_lista.js` e `acesso_guard_registro.js`, `src/App.tsx`, `src/components/Layout.tsx`, `src/components/ProtecaoAcesso.tsx`, `src/pages/Index.tsx`, `src/pages/Login.tsx`, `src/pages/Areas.tsx`, `src/pages/EmConstrucao.tsx`, `src/services/acessos.ts`, `src/lib/mensagens-erro.ts`, `index.html` |
 | 19/11/2026 | debug da Apollo (chave real) | b97697c | `pocketbase/hooks/contas_api.js`, `pocketbase/hooks/pesquisa_conta.js` |
+| 25/11/2026 | CL-003 + busca real (sem task) | a11ddeb | `pocketbase/hooks/contas_api.js` |

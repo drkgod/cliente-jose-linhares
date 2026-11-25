@@ -43,7 +43,7 @@ tarefas que já têm um.
     > Coleção acessos com o José como admin, regra no servidor em todas as coleções e cofre testado. Prova: TDD 2, 4 e 5 da SPEC-1-001 (CA-1-02, CA-1-04).
 - [x] Cadastrar o cliente atendido e o perfil ideal sugerido por IA @"José Linhares" !23/11/2026 #projeto
   > Cada cliente com carteira própria; a IA sugere o perfil ideal pelo site e pelo cadastro e o José aprova. Fecha pela prova automática. Ref.: SPEC-1-002.
-  - [ ] Informar ao Maestro os dados do cliente teste @"José Linhares" !19/11/2026 #projeto
+  - [x] Informar ao Maestro os dados do cliente teste @"José Linhares" !19/11/2026 #projeto
     > Insumo do José (CL-003): site, produtos, dores e soluções, playbook, closer e regras de prioridade do cliente teste, direto no Maestro.
   - [ ] Guardar a chave da IA no cofre do Skip @"José Linhares" !19/11/2026 #projeto
     > Insumo do José (CL-005): colar a chave como IA_API_KEY direto no cofre do Skip. A chave nunca vai por chat, e-mail ou WhatsApp.
