@@ -203,6 +203,8 @@ routerAdd('POST', '/backend/v1/pesquisas/pesquisar', (e) => {
   // ---- 3. Decisores (Apollo) ----
   const decisores = []
   let decisoresFonte = ''
+  let areaComercial = ''
+  let areaComercialDetalhe = ''
   const chaveApollo = $secrets.get('APOLLO_API_KEY') || ''
   if (chaveApollo) {
     const dominioApollo = String(conta.getString('dominio') || '')
@@ -334,6 +336,31 @@ routerAdd('POST', '/backend/v1/pesquisas/pesquisar', (e) => {
             fonte: candidatos[i].fonte,
           })
         }
+
+        // ---- Área comercial própria ----
+        // Fábrica que só produz para o grupo não tem quem compre CRM/SFA: a Brainfarma é
+        // a fábrica da Hypera e vende a produção para a controladora. Nota alta sem
+        // comprador é o pior lead. Aqui a conta passa a carregar esse veredito.
+        let titulosComerciais = 0
+        for (let i = 0; i < pessoas.length; i++) {
+          const t = String((pessoas[i] || {}).title || '').toLowerCase()
+          const ehComercial =
+            t.indexOf('comercial') >= 0 ||
+            t.indexOf('vendas') >= 0 ||
+            t.indexOf('sales') >= 0 ||
+            t.indexOf('trade') >= 0 ||
+            t.indexOf('marketing') >= 0 ||
+            t.indexOf('crm') >= 0 ||
+            t.indexOf('sfe') >= 0
+          // Analista/assistente não é área comercial estruturada: é apoio.
+          const ehApoio = t.indexOf('analista') >= 0 || t.indexOf('assistente') >= 0
+          if (ehComercial && !ehApoio) titulosComerciais++
+        }
+        areaComercial = titulosComerciais >= 2 ? 'sim' : 'nao'
+        areaComercialDetalhe =
+          titulosComerciais +
+          ' cargo(s) comercial(is) de gestão' +
+          (titulosComerciais === 0 ? ' — nenhuma área comercial própria' : '')
       }
     } catch (_err) {
       parcial = true
@@ -571,6 +598,12 @@ routerAdd('POST', '/backend/v1/pesquisas/pesquisar', (e) => {
   notaAjuste += pesos[maturidade.pixel.situacao] || 0
   notaAjuste += pesos[maturidade.automacao.situacao] || 0
   const contaAtual = $app.findRecordById('contas', contaId)
+  // Grava o veredito da área comercial: a triagem usa isto no critério verificável.
+  if (areaComercial) {
+    contaAtual.set('area_comercial', areaComercial)
+    contaAtual.set('area_comercial_evidencia', areaComercialDetalhe)
+    $app.save(contaAtual)
+  }
   const notaBase = contaAtual.getInt('nota')
   const novaNota = Math.min(100, notaBase + notaAjuste)
   if (novaNota !== notaBase) {
@@ -607,6 +640,8 @@ routerAdd('POST', '/backend/v1/pesquisas/pesquisar', (e) => {
     briefing: briefingFinal,
     nota: novaNota,
     briefing_ok: briefingOk,
+    area_comercial: areaComercial,
+    area_comercial_detalhe: areaComercialDetalhe,
   })
 })
 

@@ -1,0 +1,48 @@
+PROVA — criterio 'tem area comercial propria' (aprovado pelo Jose em 26/11/2026)
+Data: 2026-11-26T10:26:02.872332+00:00
+Skip 9629e8d (0.0.32), publicado.
+
+== O QUE MUDOU ==
+Novo criterio no perfil, com peso, avaliado por dado que a pesquisa descobre:
+  {campo:'area_comercial', pontos:25}
+Pesos redistribuidos para somar 100:
+  Segmento (CNAE) ............... 30
+  Receita (capital social) ...... 25
+  Area comercial propria ........ 25
+  Manuais (equipe/tech/decisor) .. 20
+
+Como a conta ganha o veredito: a pesquisa varre os cargos do dominio no Apollo e conta
+quantos sao de GESTAO comercial (comercial/vendas/sales/trade/marketing/crm/sfe),
+ignorando analista e assistente (apoio, nao area estruturada).
+  2 ou mais cargos de gestao comercial -> area_comercial = sim
+  nenhum/1                              -> area_comercial = nao
+Conta nao pesquisada ainda NAO e penalizada: dado ausente nao e dado negativo.
+
+== PROVA: as duas contas que motivaram o criterio ==
+  APSEN FARMACEUTICA
+    area_comercial = sim | 15 cargos comerciais de gestao
+    nota 80 | faixa A | PRIORIDADE
+      30 Segmento farmaceutico
+      25 Receita acima de R$ 50 milhoes
+      25 Tem area comercial propria
+
+  BRAINFARMA (fabrica do grupo Hypera)
+    area_comercial = nao | 0 cargos comerciais de gestao
+    nota 60 | faixa B  (caiu de faixa A)
+      30 Segmento farmaceutico
+      25 Receita acima de R$ 50 milhoes
+       5 Maturidade digital (pixel)
+    => deixou de ser faixa A: nao tem quem compre CRM/SFA
+
+== DEFEITO GRAVE CORRIGIDO NO CAMINHO ==
+A nota calculada pela pesquisa (que soma os pontos de maturidade digital) era APAGADA
+pela triagem: qualquer update da conta reescrevia nota e motivos do zero. A Brainfarma
+tinha ido para 75 e voltou para 70 sozinha - reproduzido e corrigido.
+Agora a triagem PRESERVA os pontos de 'Maturidade digital' que a pesquisa somou.
+Prova: Brainfarma em 60, um PATCH qualquer, e continua 60 com os +5 no motivo.
+
+== AINDA PENDENTE ==
+Blau, Prati-Donaduzzi, Recol e as demais continuam com os pesos antigos (40/30) porque
+nao foram pesquisadas: o motor le os pontos gravados em cada criterio. A migracao
+ajustou o perfil para 30/25/25, e a nota delas se acerta na pesquisa de cada uma ou
+numa retriagem geral, que ainda vou rodar.

@@ -144,6 +144,13 @@ onRecordAfterCreateSuccess((e) => {
       }
       return false
     }
+    if (campo === 'area_comercial') {
+      // Só a pesquisa da conta descobre isto (varrendo os cargos no Apollo), então o
+      // resultado dela manda: 'sim' pontua, 'nao' não pontua. Enquanto ninguém pesquisou,
+      // a conta não é penalizada nem premiada por um dado que ainda não existe.
+      if (!reg.getString('consultado_em')) return false
+      return reg.getString('area_comercial') === 'sim'
+    }
     return false
   }
 
@@ -231,6 +238,27 @@ onRecordAfterCreateSuccess((e) => {
       motivos.push({ regra: 'Perfil sem critérios de prioridade', pontos: 0 })
       triagem = 'fora_do_perfil'
     }
+  }
+
+  // Os pontos de maturidade digital vêm da pesquisa da conta (RN-17). A triagem não os
+  // recalcula, mas precisa PRESERVÁ-LOS: antes ela reescrevia nota e motivos do zero e o
+  // +5 da maturidade sumia no primeiro update da conta (75 voltava para 70).
+  let somaMaturidade = 0
+  try {
+    const anteriores = JSON.parse(alvo.getString('motivos') || '[]')
+    if (anteriores && anteriores.length) {
+      for (let i = 0; i < anteriores.length; i++) {
+        if (String(anteriores[i].regra || '').indexOf('Maturidade digital') === 0) {
+          somaMaturidade += Number(anteriores[i].pontos) || 0
+        }
+      }
+    }
+  } catch (_) {
+    somaMaturidade = 0
+  }
+  if (somaMaturidade > 0 && triagem === 'prioridade') {
+    motivos.push({ regra: 'Maturidade digital: já usa automação', pontos: somaMaturidade })
+    nota = Math.min(100, nota + somaMaturidade)
   }
 
   const faixa = nota >= 70 ? 'A' : nota >= 40 ? 'B' : 'C'
@@ -378,6 +406,10 @@ onRecordAfterUpdateSuccess((e) => {
       }
       return false
     }
+    if (campo === 'area_comercial') {
+      if (!reg.getString('consultado_em')) return false
+      return reg.getString('area_comercial') === 'sim'
+    }
     return false
   }
 
@@ -458,6 +490,26 @@ onRecordAfterUpdateSuccess((e) => {
       triagem = 'fora_do_perfil'
       motivos.push({ regra: 'Perfil sem critérios de prioridade', pontos: 0 })
     }
+  }
+
+  // Preserva os pontos de maturidade digital que a pesquisa já tinha somado (RN-17).
+  // Sem isto, qualquer update da conta apagava o ajuste: 75 voltava para 70.
+  let somaMaturidade = 0
+  try {
+    const anteriores = JSON.parse(conta.getString('motivos') || '[]')
+    if (anteriores && anteriores.length) {
+      for (let i = 0; i < anteriores.length; i++) {
+        if (String(anteriores[i].regra || '').indexOf('Maturidade digital') === 0) {
+          somaMaturidade += Number(anteriores[i].pontos) || 0
+        }
+      }
+    }
+  } catch (_) {
+    somaMaturidade = 0
+  }
+  if (somaMaturidade > 0 && triagem === 'prioridade') {
+    motivos.push({ regra: 'Maturidade digital: já usa automação', pontos: somaMaturidade })
+    nota = Math.min(100, nota + somaMaturidade)
   }
 
   const atual = $app.findRecordById('contas', conta.id)

@@ -15,12 +15,12 @@
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: 610516e
-- skip_publicacao: publicada:610516e em 2026-11-26T02:14:48.480Z
+- skip_versao: 9629e8d
+- skip_publicacao: publicada:9629e8d em 2026-11-26T10:25:55.135Z
 - pendente_github: nao
-- ultima_acao: roteiro do funil rodado na Brainfarma (pesquisa ok, nota 70->75, briefing com fonte); leitura de site e decisores comerciais corrigidos
-- proxima_acao: definir criterio "tem area comercial propria" no perfil (Brainfarma tem nota alta e nao tem comprador de CRM)
-- atualizado_em: 2026-11-25T23:15:00-03:00
+- ultima_acao: criterio "tem area comercial propria" entregue — Apsen 80/A, Brainfarma 60/B; corrigida a nota de maturidade que se perdia
+- proxima_acao: pesquisar as contas restantes (Blau, Prati, Recol...) para cada uma ganhar o veredito de area comercial
+- atualizado_em: 2026-11-26T07:25:00-03:00
 
 ## Construção da fase 1 — concluída
 
