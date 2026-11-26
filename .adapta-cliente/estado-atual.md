@@ -15,12 +15,12 @@
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: 9629e8d
-- skip_publicacao: publicada:9629e8d em 2026-11-26T10:25:55.135Z
+- skip_versao: cdec787
+- skip_publicacao: publicada:cdec787 em 2026-11-26T11:14:21.648Z
 - pendente_github: nao
-- ultima_acao: criterio "tem area comercial propria" entregue — Apsen 80/A, Brainfarma 60/B; corrigida a nota de maturidade que se perdia
-- proxima_acao: pesquisar as contas restantes (Blau, Prati, Recol...) para cada uma ganhar o veredito de area comercial
-- atualizado_em: 2026-11-26T07:25:00-03:00
+- ultima_acao: nota de corte 70 na Prioridade (aba Em avaliacao criada) + 22 contas pesquisadas; Prioridade 5, Em avaliacao 10, Pendentes 19
+- proxima_acao: CL-004 — Jose manda os CNPJs das 19 contas pendentes (ou aprova o plano Dev do apipj para varrer por CNAE)
+- atualizado_em: 2026-11-26T08:15:00-03:00
 
 ## Construção da fase 1 — concluída
 

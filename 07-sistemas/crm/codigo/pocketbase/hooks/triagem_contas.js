@@ -261,6 +261,13 @@ onRecordAfterCreateSuccess((e) => {
     nota = Math.min(100, nota + somaMaturidade)
   }
 
+  // Regra 9 do José: "abaixo de 70 não entra na fila ativa".
+  // A conta continua no sistema com a nota e o motivo — só não é prioridade.
+  if (triagem === 'prioridade' && nota < 70) {
+    triagem = 'em_avaliacao'
+    motivos.push({ regra: 'Nota abaixo de 70: não entra na fila ativa', pontos: 0 })
+  }
+
   const faixa = nota >= 70 ? 'A' : nota >= 40 ? 'B' : 'C'
 
   alvo.set('nota', nota)
@@ -510,6 +517,12 @@ onRecordAfterUpdateSuccess((e) => {
   if (somaMaturidade > 0 && triagem === 'prioridade') {
     motivos.push({ regra: 'Maturidade digital: já usa automação', pontos: somaMaturidade })
     nota = Math.min(100, nota + somaMaturidade)
+  }
+
+  // Regra 9 do José: "abaixo de 70 não entra na fila ativa".
+  if (triagem === 'prioridade' && nota < 70) {
+    triagem = 'em_avaliacao'
+    motivos.push({ regra: 'Nota abaixo de 70: não entra na fila ativa', pontos: 0 })
   }
 
   const atual = $app.findRecordById('contas', conta.id)

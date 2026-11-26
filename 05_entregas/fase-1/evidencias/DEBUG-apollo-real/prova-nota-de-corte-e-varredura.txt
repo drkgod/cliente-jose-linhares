@@ -1,0 +1,56 @@
+PROVA — nota de corte 70 na Prioridade + varredura da carteira (26/11/2026)
+Skip cdec787 (0.0.33), publicado. Data: 2026-11-26T11:16:13.290426+00:00
+
+== 1. Nota de corte (regra 9 do Jose, aplicada) ==
+Antes: qualquer conta com 1 ponto entrava em Prioridade, inclusive nota 30 faixa C.
+Agora: prioridade exige nota >= 70. Abaixo disso a conta vai para EM AVALIACAO,
+com nota e motivo preservados, e uma aba nova na tela mostra essa lista.
+A etapa do funil NAO foi tocada (e do Jose, SPEC-1-005).
+
+== 2. Resultado na tela (conferido no navegador, producao) ==
+  Prioridade ....... 5 contas
+  Em avaliacao .... 10 contas
+  Fora do perfil ... 0
+  Pendentes ....... 19
+
+  Fila ativa (todas com area comercial propria):
+     80  Apsen Farmaceutica
+     80  Blau Farmaceutica
+     80  Prati-Donaduzzi
+     80  Cellera Farma
+     80  Grupo Tapajos
+
+  Em avaliacao (abaixo de 70):
+     60  Brainfarma                                                   (fabrica da Hypera, sem area comercial)
+     55  Recol Distribuicao                                           (sem area comercial própria)
+     30  Ifarma / Amazon / HSTA / Agrobrasil / D S Bruneto / Triang   (sem CNPJ ainda)
+     25  Ativa Logistica                                              (segmento fora do perfil)
+
+== 3. Varredura da carteira: 22 contas pesquisadas ==
+Todas as 22 contas com dominio foram pesquisadas (site + decisores + area comercial).
+RESULTADO: 21 com area comercial propria = sim, 1 nao (g1 Therapeutics).
+Achado: quase todo o setor farmaceutico TEM area comercial propria - a Brainfarma e
+a excecao (fabrica de grupo), nao a regra. O criterio funciona como filtro de excecao.
+
+== 4. CNPJ: o limite real ==
+Tentei achar o CNPJ das 22 pela base da Receita:
+  - Varredura por CNAE: 552 fabricantes + 312 veterinarios, paginando de 10 em 10
+    (limite do plano gratuito). Muito lenta e sem casar por nome (a base nao tem
+    busca por razao social - provado: ?razao_social, ?nome e ?q dao validation_error).
+  - Varredura do rodape dos sites + validacao na BrasilAPI: achou 3 de 22,
+    cada um CONFIRMADO pela razao social:
+      Ativa Logistica    01125797000116 -> ATIVA DISTRIBUICAO E LOGISTICA LTDA
+      Cellera Farma      33173097000274 -> CELLERA FARMACEUTICA S.A.
+      Grupo Tapajos      84521053000148 -> TAPAJOS COMERCIO DE MEDICAMENTOS LTDA
+    Os 3 foram gravados e ja subiram para faixa A (80 pontos).
+  - Falso positivo descartado: 'Torrent do Brasil' trouxe 00793310000100, que e
+    LEE, BROCK, CAMARGO ADVOGADOS. Sem validar a razao social, viraria dado errado
+    na conta - exatamente o erro do Laboratorio Teuto de ontem.
+
+== 5. Conclusao honesta ==
+19 contas seguem em Pendentes por falta de CNPJ. Nao existe fonte gratuita que
+de CNPJ a partir do nome da empresa; a Apollo nao devolve CNPJ e a base da Receita
+so aceita consulta por CNPJ ou listagem por CNAE. Para fechar essas 19:
+  (a) Jose manda a lista de CNPJs (10-20, como combinado no CL-004), ou
+  (b) plano pago do apipj (Dev R$ 12,90: 30/min e 200 mil/mes) para varrer por
+      CNAE em volume e casar por razao social.

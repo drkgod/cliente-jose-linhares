@@ -647,6 +647,7 @@ routerAdd('GET', '/backend/v1/contas', (e) => {
 
   let filtro = 'cliente = {:c}'
   if (aba === 'prioridade') filtro += ' && situacao_triagem = "prioridade"'
+  else if (aba === 'em_avaliacao') filtro += ' && situacao_triagem = "em_avaliacao"'
   else if (aba === 'fora_do_perfil') filtro += ' && situacao_triagem = "fora_do_perfil"'
   else if (aba === 'pendentes') filtro += ' && situacao_triagem = "pendente_dados"'
 
