@@ -1,0 +1,50 @@
+PROVA — roteiro do funil na Brainfarma (primeira conta pontuada)
+Data: 2026-11-26T02:15:33.115964+00:00
+Skip 610516e (0.0.31), publicado. Conta 49z6p6ajvmdr4rx, nota 70 -> 75.
+
+== 1. Pesquisa disparada (POST /backend/v1/pesquisas/pesquisar) ==
+status: ok | briefing_ok: true | motivo: (vazio) | decisores gravados: 5
+site: brainfarma.ind.br status=200 bytes=18827
+
+== 2. Maturidade digital ==
+  CRM ....... nao  (scripts no HTML, nenhum de CRM)
+  Pixel ..... sim  (googletagmanager.com)
+  Automacao . nao  (nenhum marcador)
+  -> nota subiu de 70 para 75 (RN-17: +5 pelo pixel)
+
+== 3. Briefing (com fonte declarada) ==
+  dor_provavel [site] ....... Sinal no site sobre "compliance", dor que a Magically
+                              ataca com SFA e rastreabilidade de campo
+  gatilho      [site] ....... contratacao em andamento
+  abordagem    [playbook] ... segue o playbook do cliente
+
+== 4. Decisores devolvidos (Apollo) ==
+  - Daniela Ca***o     Chief Operations Officer
+  - Alexandre Fi***i   Diretor de Producao
+  - Luiz Si***a        Diretor de Engenharia e Manutencao
+  - Humberto Gu***s    Head of Procurement
+  - Charles Co***o     Gerente Senior de Planejamento de Operacoes
+
+== 5. ACHADO DE PRODUTO (importante) ==
+A Brainfarma NAO TEM AREA COMERCIAL PROPRIA. Varredura de 3 paginas do dominio
+(300 pessoas) achou apenas 2 titulos comerciais, ambos ANALISTAS de planejamento:
+  'Analista de Planejamento Vendas e Operacoes Senior'
+  'Analista de Planejamento de Vendas e Operacoes Pleno'
+Motivo: a Brainfarma e a fabrica do grupo Hypera e vende a producao para a
+controladora - quem tem forca de vendas e a Hypera, nao a Brainfarma.
+CONSEQUENCIA COMERCIAL: pela propria regra 3 do cliente, a Brainfarma seria
+'distribuidora' e entraria em faixa intermediaria. Mas o decisor de CRM nao existe
+ali. Conta com nota alta e sem comprador e o pior tipo de lead: da trabalho e nao
+fecha. Precisa de um criterio novo no perfil (ter area comercial propria).
+
+== 6. Defeitos corrigidos no caminho ==
+a) Site nao era lido: brainfarma.com.br responde 302 (Cloudflare) e o hook nao
+   seguia redirect nem mandava User-Agent. Agora manda UA de navegador e o
+   dominio correto e .ind.br. Prova: status=200, 18827 bytes lidos.
+b) Decisores vinham so por senioridade: a conta trazia COO, engenharia e compras.
+   Agora a area comercial entra na frente da hierarquia.
+c) person_titles NAO funciona nesta chave da Apollo (devolve 0 sempre, testado
+   em PT e EN, sozinho e combinado). A busca e ampla (per_page=100) e a
+   classificacao por area e feita no codigo.
+d) Decisor ja gravado nao atualizava o cargo. Agora atualiza (sem perder correcao
+   do Jose).

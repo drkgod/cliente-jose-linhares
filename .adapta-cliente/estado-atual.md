@@ -15,12 +15,12 @@
 - aprendizado: pendente
 - sistema: crm
 - skip_projeto: 78281
-- skip_versao: a63e651
-- skip_publicacao: publicada:a63e651 em 2026-11-25T18:34:15.372Z
+- skip_versao: 610516e
+- skip_publicacao: publicada:610516e em 2026-11-26T02:14:48.480Z
 - pendente_github: nao
-- ultima_acao: opcao A entregue — CNPJ da Receita na busca (5 contas novas com CNPJ) + regras verificaveis (Apsen/Blau/Prati de 0 para 70 faixa A)
-- proxima_acao: completar o CNPJ das 22 contas da Apollo e rodar o roteiro do funil com o Jose
-- atualizado_em: 2026-11-25T15:35:00-03:00
+- ultima_acao: roteiro do funil rodado na Brainfarma (pesquisa ok, nota 70->75, briefing com fonte); leitura de site e decisores comerciais corrigidos
+- proxima_acao: definir criterio "tem area comercial propria" no perfil (Brainfarma tem nota alta e nao tem comprador de CRM)
+- atualizado_em: 2026-11-25T23:15:00-03:00
 
 ## Construção da fase 1 — concluída
 
