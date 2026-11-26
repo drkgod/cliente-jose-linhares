@@ -6,8 +6,8 @@
 - url_producao: https://projeto-native-60baf.goskip.app
 - url_preview: https://projeto-native-60baf--preview.goskip.app
 - skip_cloud: projeto-native-60baf (banco, login e automações de servidor provisionados)
-- versao_aplicada: eed24e5 (0.0.37)
-- versao_publicada: eed24e5 em 2026-11-26T14:43:59.278Z
+- versao_aplicada: 4781f65 (0.0.38)
+- versao_publicada: 4781f65 em 2026-11-26T14:46:39.745Z
 - ultima_task: CL-003 (cliente teste Magically Brasil) + corrigir a tradução do perfil para a busca
 - registrado_em: 2026-11-16
 - observacao_de_nome: `STATUS.md` e `04_fase-atual/fase.md` citam o projeto "JLA — CRM de prospecção" no Skip. Em 16/11/2026 o José decidiu construir o sistema no projeto "Projeto Native" (id 78281); este arquivo é a fonte da verdade sobre onde o sistema roda.
