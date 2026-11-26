@@ -1,0 +1,48 @@
+PROVA — CNPJá assinada: carteira completa e pesquisada (26/11/2026)
+Skip eed24e5, publicado. Chave CNPJA_API_KEY no cofre (plano BASIC, 1.000 creditos/mes).
+
+== 1. A chave do plano gratuito continuou valida ==
+Assinar NAO troca a chave: o mesmo token passou de 50 para 1.000 creditos/mes.
+
+== 2. A CNPJa devolve e-mail e dominio (a duvida que travava a decisao) ==
+GET /office/{cnpj} em Laboratorio Teuto:
+  emails: [{"ownership":"CORPORATE","domain":"teuto.com.br","address":"fiscal@teuto.com.br"}]
+A busca por filtro tambem ja traz emails[] em cada registro.
+RESULTADO: 110 dos 123 dominios preenchidos; 126 das 149 contas com dominio.
+
+== 3. Pesquisa completa da carteira ==
+Todas as contas com dominio foram pesquisadas (site + decisores + area comercial).
+Contas com dominio e sem veredito de area comercial: 0
+
+== 4. Estado final da carteira ==
+  Total .......................... 149
+  Com CNPJ ....................... 142
+  Com dominio .................... 126
+  NA FILA ATIVA (nota >= 70) ..... 106
+  Em avaliacao (abaixo de 70) .... 36
+  Pendentes de CNPJ ............... 7
+
+  Distribuicao de nota:
+     95 pontos:   3 contas
+     90 pontos:   3 contas
+     85 pontos:  48 contas
+     80 pontos:  52 contas
+     60 pontos:   5 contas
+     55 pontos:  22 contas
+     30 pontos:   7 contas
+     25 pontos:   2 contas
+      0 pontos:   7 contas
+
+== 5. Comparacao com o inicio do dia ==
+  MANHA: 30 contas, 8 com CNPJ, 8 pontuadas, 0 na fila ativa util
+  AGORA: 149 contas, 142 com CNPJ, 126 com dominio, 106 na fila ativa
+
+== 6. Custo real ==
+1 credito a cada 10 registros. 50 gratuitos + 1.000 do BASIC.
+A carga inteira (458 do perfil + 13 buscas por razao social) consumiu ~60 creditos.
+Sobra folga para a busca semanal e para as proximas cargas.
+
+== 7. Pendencias ===
+  - 7 contas sem CNPJ: Granado, Supera Farma, g1, MSD Saude Animal, Torrent,
+    Farmax, Zoetis. (2 estouraram o limite, 2 casam mal por nome composto.)
+  - 23 contas sem dominio: nao estavam na carga por CNAE do perfil.

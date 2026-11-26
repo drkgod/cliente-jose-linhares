@@ -6,8 +6,8 @@
 - url_producao: https://projeto-native-60baf.goskip.app
 - url_preview: https://projeto-native-60baf--preview.goskip.app
 - skip_cloud: projeto-native-60baf (banco, login e automações de servidor provisionados)
-- versao_aplicada: cdec787 (0.0.33)
-- versao_publicada: cdec787 em 2026-11-26T11:14:21.648Z
+- versao_aplicada: eed24e5 (0.0.37)
+- versao_publicada: eed24e5 em 2026-11-26T14:43:59.278Z
 - ultima_task: CL-003 (cliente teste Magically Brasil) + corrigir a tradução do perfil para a busca
 - registrado_em: 2026-11-16
 - observacao_de_nome: `STATUS.md` e `04_fase-atual/fase.md` citam o projeto "JLA — CRM de prospecção" no Skip. Em 16/11/2026 o José decidiu construir o sistema no projeto "Projeto Native" (id 78281); este arquivo é a fonte da verdade sobre onde o sistema roda.
@@ -30,3 +30,4 @@
 | 25/11/2026 | roteiro do funil (pesquisa/decisores/briefing) | 610516e | `pesquisa_conta.js` |
 | 26/11/2026 | critério área comercial própria | 9629e8d | `triagem_contas.js`, `pesquisa_conta.js`, migração `0020_area_comercial.js` |
 | 26/11/2026 | nota de corte 70 + aba Em avaliação | cdec787 | `triagem_contas.js`, `contas_api.js`, `Contas.tsx`, `contas.ts`, migração `0021_nota_de_corte.js` |
+| 26/11/2026 | fonte CNPJá + domínio/e-mail em massa | eed24e5 | `contas_api.js`, `pesquisa_conta.js` |

@@ -18,9 +18,9 @@
 - skip_versao: cdec787
 - skip_publicacao: publicada:cdec787 em 2026-11-26T11:14:21.648Z
 - pendente_github: nao
-- ultima_acao: nota de corte 70 na Prioridade (aba Em avaliacao criada) + 22 contas pesquisadas; Prioridade 5, Em avaliacao 10, Pendentes 19
-- proxima_acao: CL-004 — Jose manda os CNPJs das 19 contas pendentes (ou aprova o plano Dev do apipj para varrer por CNAE)
-- atualizado_em: 2026-11-26T08:15:00-03:00
+- ultima_acao: CNPJa assinado; 149 contas (142 com CNPJ, 126 com dominio) todas pesquisadas — 106 na fila ativa, 36 em avaliacao
+- proxima_acao: fechar os 7 pendentes de CNPJ (Granado, Supera, MSD, Torrent, Farmax, Zoetis, g1) e revisar as 23 sem dominio
+- atualizado_em: 2026-11-26T11:45:00-03:00
 
 ## Construção da fase 1 — concluída
 
