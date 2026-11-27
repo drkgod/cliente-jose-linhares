@@ -18,8 +18,8 @@
 - skip_versao: cdec787
 - skip_publicacao: publicada:cdec787 em 2026-11-26T11:14:21.648Z
 - pendente_github: nao
-- ultima_acao: CNPJa assinado; 149 contas (142 com CNPJ, 126 com dominio) todas pesquisadas — 106 na fila ativa, 36 em avaliacao
-- proxima_acao: fechar os 7 pendentes de CNPJ (Granado, Supera, MSD, Torrent, Farmax, Zoetis, g1) e revisar as 23 sem dominio
+- ultima_acao: 7 pendentes de CNPJ fechados (6 pelo dominio do e-mail; g1 nao tem CNPJ BR) e busca semanal consertada: cron em UTC, CNPJa limit=20 e laco fechado da pesquisa. Carteira 153, 101 na fila
+- proxima_acao: 7 contas com dominio sem veredito de area comercial — a varredura diaria (11h UTC) resolve; conferir a 1a busca semanal na segunda 7h BRT
 - atualizado_em: 2026-11-26T11:45:00-03:00
 
 ## Construção da fase 1 — concluída

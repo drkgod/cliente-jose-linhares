@@ -1,0 +1,48 @@
+PROVA — 7 pendentes de CNPJ fechados + busca semanal com CNPJa como fonte principal
+Skip c82911f / 4a4c727 (0.0.40 / 0.0.41), publicados em 27/11/2026.
+
+== 1. Os 7 CNPJs ==
+O filtro company.name.in da CNPJa casa por token e devolve ruido: 'torrent do brasil'
+retornou BANCO DO BRASIL. A busca por email (emails.domain.in=<dominio>) e exata e
+resolveu tudo. Todos validados pelo dominio do e-mail corporativo batendo com o site.
+
+  Granado ...... 33109356000117  CASA GRANADO LABORATORIOS FARMACIAS E DROGARIAS S.A.
+  Supera Farma . 43312503000105  SUPERA FARMA LABORATORIOS S.A.
+  MSD Saude .... 07954091000143  MERCK SHARP & DOHME SAUDE ANIMAL LTDA
+  Torrent ...... 33078528000132  TORRENT DO BRASIL LTDA
+  Farmax ....... 21759758000188  FARMAX S.A.
+  Zoetis ....... 43588045000131  ZOETIS INDUSTRIA DE PRODUTOS VETERINARIOS LTDA
+  g1 ........... SEM CNPJ BRASILEIRO - nenhum registro com o dominio g1therapeutics.com.
+                 E filial da americana G1 Therapeutics; fica sem CNPJ por natureza.
+
+As 6 voltaram de 0 para 80 pontos / faixa A / Prioridade, com BrasilAPI consultada na hora.
+
+== 2. Por que a busca semanal nunca funcionou ==
+Tres defeitos, todos no codigo:
+  a) FUSO: cronAdd avalia o cron em UTC. '0 7 * * 1' rodava as 04h de Brasilia.
+     Corrigido para '0 10 * * 1' = 7h BRT.
+  b) A CNPJa trazia sempre os MESMOS 20 registros (limit=20, uma chamada so), entao
+     toda rodada dava 'repetidas'. Agora: uma chamada por CNAE com limit=100.
+     Custo ~30 creditos por rodada, 120/mes no plano de 1.000.
+  c) LACO FECHADO na pesquisa: a conta so era pesquisada ao entrar em Prioridade, e so
+     entra em Prioridade depois de pesquisada (precisa da area comercial). Por isso as
+     126 contas tiveram de ser pesquisadas a mao. Agora: pesquisa dispara na CRIACAO da
+     conta com dominio, e um cron diario (pesquisa_varredura, 11h UTC) varre o resto.
+
+== 3. Dominio vindo da CNPJa ==
+A CNPJa devolve emails[].domain. A busca extrai o dominio corporativo dali (ignorando
+gmail/hotmail/outlook/terra/uol/bol/ig) e a conta ja nasce com site.
+
+== 4. Defeito de duplicata encontrado e corrigido na prova ==
+1a rodada: 14 contas repetidas (quem entrou por dominio tem chave 'dominio:...' e a
+CNPJa chega com chave nos digitos). Corrigido com tres casamentos: chave -> CNPJ -> dominio.
+2a rodada: a CNPJa lista varias matrizes do mesmo grupo com CNPJs diferentes (Hypera 3,
+NOVAMED 5, Pfizer 3, Elfa 4) -> mais 22 duplicatas, tambem apagadas. 36 no total.
+
+PROVA FINAL - duas rodadas seguidas com o codigo publicado:
+  antes 151 -> depois 153 (2 novas) | dominio duplicado: 0 | CNPJ duplicado: 0
+
+== 5. Estado da carteira ==
+  153 contas | 152 com CNPJ | 132 com dominio
+  101 na fila ativa (nota >= 70) | 50 em avaliacao | 2 pendentes
+  7 com dominio ainda sem veredito de area comercial -> entram na varredura diaria
